@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">mvvm-run1</string>
     <string name="floatingAdd">Add</string>
+    <string name="editTxtContent">Content</string>
+    <string name="editTxtTitle">Title</string>
+    <string name="imgViewSpeechToText">Speech to text</string>
 </resources>
