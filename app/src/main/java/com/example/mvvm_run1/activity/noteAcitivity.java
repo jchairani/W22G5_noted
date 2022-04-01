@@ -86,14 +86,6 @@ public class noteAcitivity extends AppCompatActivity {
             }
         }
 
-
-//        else {
-//            if(position!=-1){
-//                Note update = new Note(title, content, userid);
-//                noteViewModel.updateNote(update);
-//            }
-//        }
-
 //        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 //        editor.putString("title", etTitle.getText().toString());
 //        editor.putString("content", etContent.getText().toString());

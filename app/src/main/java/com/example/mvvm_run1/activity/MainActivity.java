@@ -17,15 +17,18 @@ import com.example.mvvm_run1.adapter.NoteAdapter;
 import com.example.mvvm_run1.model.Note;
 import com.example.mvvm_run1.activity.noteAcitivity;
 import com.example.mvvm_run1.viewmodel.NoteViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     NoteViewModel noteViewModel;
-    ListView listView;
     NoteAdapter noteAdapter;
     Button add;
+    ListView lv;
+    FloatingActionButton addButton;
+
     int userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userid = intent.getIntExtra("userid",0);
         Log.d("josjos",""+userid);
-        listView = findViewById(R.id.listVIewNotes);
-        add = findViewById(R.id.button);
+        lv = findViewById(R.id.listVIewNotes);
+        addButton = findViewById(R.id.addButton);
+
         initListView();
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
@@ -48,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        add.setOnClickListener(new View.OnClickListener() {
+
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, noteAcitivity.class);
@@ -58,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -72,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private void initListView(){
         List<Note> notes = new ArrayList<>();
         noteAdapter = new NoteAdapter(notes);
-        listView.setAdapter(noteAdapter);
+        lv.setAdapter(noteAdapter);
     }
 
 

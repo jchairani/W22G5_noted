@@ -30,9 +30,6 @@ public class loginActivity extends AppCompatActivity {
         login = findViewById(R.id.loginButton);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-
-//        userViewModel.insertUser(new User("asdf", "asdfasdf"));
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
