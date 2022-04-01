@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mvvmrun1">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".noteAcitivity"
+            android:name=".activity.noteAcitivity"
             android:exported="false" />
         <activity
-            android:name=".loginActivity"
+            android:name=".activity.loginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
