@@ -8,27 +8,27 @@
     android:orientation="vertical">
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
         android:id="@+id/editTextTitle"
-        android:hint="Title"
-        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:layout_marginTop="10dp"
-        />
+        android:hint="@string/editTxtTitle"
+        android:padding="10dp" />
+
     <EditText
+        android:id="@+id/editTextContent"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:id="@+id/editTextContent"
-        android:hint="Content"
-        android:padding="10dp"
         android:layout_marginTop="10dp"
-        />
-    <Button
+        android:hint="@string/editTxtContent"
+        android:padding="10dp" />
+
+    <ImageView
+        android:id="@+id/imgViewSpeechToTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="back"
-        android:id="@+id/backButton"
-        android:layout_marginStart="10dp"
-        />
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/imgViewSpeechToText"
+        app:srcCompat="@android:drawable/ic_btn_speak_now" />
 
 </LinearLayout>
