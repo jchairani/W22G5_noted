@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">mvvm-run1</string>
+    <string name="floatingAdd">Add</string>
 </resources>

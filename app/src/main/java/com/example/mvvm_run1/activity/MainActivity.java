@@ -16,6 +16,7 @@ import com.example.mvvm_run1.adapter.NoteAdapter;
 import com.example.mvvm_run1.model.Note;
 import com.example.mvvm_run1.activity.noteAcitivity;
 import com.example.mvvm_run1.viewmodel.NoteViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     NoteAdapter noteAdapter;
     ListView lv;
-    Button add;
+    FloatingActionButton addButton;
+
     int userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         userid = intent.getIntExtra("userid",0);
         Log.d("josjos",""+userid);
         lv = findViewById(R.id.listVIewNotes);
-        add = findViewById(R.id.button);
+        addButton = findViewById(R.id.addButton);
+
         initListView();
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        add.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, noteAcitivity.class);

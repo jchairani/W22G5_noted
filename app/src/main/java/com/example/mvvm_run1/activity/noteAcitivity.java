@@ -33,6 +33,7 @@ public class noteAcitivity extends AppCompatActivity {
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
 
+
 //        back.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
