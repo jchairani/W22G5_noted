@@ -33,20 +33,40 @@ public class noteAcitivity extends AppCompatActivity {
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
 
-        //added comment
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String title = etTitle.getText().toString();
-                String content = etContent.getText().toString();
-                Note temp = new Note(title,content,userid);
-                noteViewModel.insertNote(temp);
-                Intent i = new Intent(noteAcitivity.this, MainActivity.class);
-                i.putExtra("userid",userid);
-                startActivity(i);
-            }
-        });
-
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String title = etTitle.getText().toString();
+//                String content = etContent.getText().toString();
+//                Note temp = new Note(title,content,userid);
+//                noteViewModel.insertNote(temp);
+//                Intent i = new Intent(noteAcitivity.this, MainActivity.class);
+//                i.putExtra("userid",userid);
+//                startActivity(i);
+//            }
+//        });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(noteAcitivity.this, MainActivity.class);
+        i.putExtra("userid", userid);
+
+        String title = etTitle.getText().toString();
+        String content = etContent.getText().toString();
+
+        if (!(title.equals("") && content.equals(""))) {
+            Note temp = new Note(title, content, userid);
+            noteViewModel.insertNote(temp);
+            startActivity(i);
+        }
+
+//        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+//        editor.putString("title", etTitle.getText().toString());
+//        editor.putString("content", etContent.getText().toString());
+//        editor.commit();
+
+        super.onBackPressed();
+    }
+
 }

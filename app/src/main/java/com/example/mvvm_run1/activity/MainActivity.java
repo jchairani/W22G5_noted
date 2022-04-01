@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.example.mvvm_run1.R;
 import com.example.mvvm_run1.adapter.NoteAdapter;
 import com.example.mvvm_run1.model.Note;
+import com.example.mvvm_run1.activity.noteAcitivity;
 import com.example.mvvm_run1.viewmodel.NoteViewModel;
 
 import java.util.ArrayList;
