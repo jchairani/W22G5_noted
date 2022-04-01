@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -24,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     NoteViewModel noteViewModel;
     ListView listView;
     NoteAdapter noteAdapter;
-    ListView lv;
     Button add;
     int userid;
     @Override
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userid = intent.getIntExtra("userid",0);
         Log.d("josjos",""+userid);
-        lv = findViewById(R.id.listVIewNotes);
+        listView = findViewById(R.id.listVIewNotes);
         add = findViewById(R.id.button);
         initListView();
 
@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,13 +57,22 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-//        test
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent intent = new Intent(getApplicationContext(), noteAcitivity.class);
+                intent.putExtra("position", i + 1);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initListView(){
         List<Note> notes = new ArrayList<>();
         noteAdapter = new NoteAdapter(notes);
-        lv.setAdapter(noteAdapter);
+        listView.setAdapter(noteAdapter);
     }
 
 

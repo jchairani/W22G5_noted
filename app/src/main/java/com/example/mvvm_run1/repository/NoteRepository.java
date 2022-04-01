@@ -19,13 +19,13 @@ public class NoteRepository {
     private LiveData<List<Note>> mnotes;
     private NoteDAO dao;
 
-    public NoteRepository(Application application){
+    public NoteRepository(Application application) {
         db = NoteDatabase.getInstance(application);
         dao = db.noteDAO();
 //        mnotes = dao.getAllNotes();
     }
 
-    public void insertNote(Note note){
+    public void insertNote(Note note) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(new Runnable() {
             @Override
@@ -36,12 +36,30 @@ public class NoteRepository {
 
     }
 
-    public LiveData<List<Note>> getNotesById(int id){
+    public void updateNote(Note note){
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                dao.updateNote(note);
+            }
+        });
+    }
+
+    public LiveData<List<Note>> getNotesById(int id) {
         return dao.getNotesById(id);
     }
 
-    public LiveData<List<Note>> getAllNotes(){
+    public LiveData<List<Note>> getAllNotes() {
         return mnotes;
+    }
+
+    public LiveData<String> getNoteTitleByNoteId(int id) {
+        return dao.getNoteTitleByNoteId(id);
+    }
+
+    public LiveData<String> getNoteContentByNoteId(int id) {
+        return dao.getNoteContentByNoteId(id);
     }
 
 }

@@ -28,4 +28,9 @@ public interface NoteDAO {
         @Query("SELECT * FROM note_table WHERE usercreatorid =:usercreatorid")
         LiveData<List<Note>> getNotesById(int usercreatorid);
 
+        @Query("SELECT notetitle FROM note_table WHERE noteid =:noteid")
+        LiveData<String> getNoteTitleByNoteId(int noteid);
+
+        @Query("SELECT notecontent FROM note_table WHERE noteid =:noteid")
+        LiveData<String> getNoteContentByNoteId(int noteid);
 }
