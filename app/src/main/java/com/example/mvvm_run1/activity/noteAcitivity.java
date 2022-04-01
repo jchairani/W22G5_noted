@@ -1,4 +1,4 @@
-package com.example.mvvm_run1;
+package com.example.mvvm_run1.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.mvvm_run1.R;
 import com.example.mvvm_run1.model.Note;
 import com.example.mvvm_run1.viewmodel.NoteViewModel;
 
@@ -32,6 +33,8 @@ public class noteAcitivity extends AppCompatActivity {
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
 
+        //added comment
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,7 +42,7 @@ public class noteAcitivity extends AppCompatActivity {
                 String content = etContent.getText().toString();
                 Note temp = new Note(title,content,userid);
                 noteViewModel.insertNote(temp);
-                Intent i = new Intent(noteAcitivity.this,MainActivity.class);
+                Intent i = new Intent(noteAcitivity.this, MainActivity.class);
                 i.putExtra("userid",userid);
                 startActivity(i);
             }

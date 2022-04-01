@@ -1,7 +1,6 @@
-package com.example.mvvm_run1;
+package com.example.mvvm_run1.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -12,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.mvvm_run1.R;
 import com.example.mvvm_run1.adapter.NoteAdapter;
 import com.example.mvvm_run1.model.Note;
 import com.example.mvvm_run1.viewmodel.NoteViewModel;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,noteAcitivity.class);
+                Intent i = new Intent(MainActivity.this, noteAcitivity.class);
                 i.putExtra("userid",userid);
                 startActivity(i);
 

@@ -1,4 +1,4 @@
-package com.example.mvvm_run1;
+package com.example.mvvm_run1.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.mvvm_run1.R;
 import com.example.mvvm_run1.model.User;
 import com.example.mvvm_run1.viewmodel.UserViewModel;
 
@@ -38,7 +39,7 @@ public class loginActivity extends AppCompatActivity {
 
                 for(int i=0;i<userList.size();i++){
                     if(userList.get(i).getUsername().equals(username) && userList.get(i).getUserpass().equals(password)){
-                        Intent intent = new Intent(loginActivity.this,MainActivity.class);
+                        Intent intent = new Intent(loginActivity.this, MainActivity.class);
                         intent.putExtra("userid",userList.get(i).getUserid());
                         startActivity(intent);
 
