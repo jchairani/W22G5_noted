@@ -29,7 +29,6 @@ public class loginActivity extends AppCompatActivity {
         login = findViewById(R.id.loginButton);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
