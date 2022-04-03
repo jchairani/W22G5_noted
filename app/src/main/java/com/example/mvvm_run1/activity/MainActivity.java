@@ -5,11 +5,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 import com.example.mvvm_run1.R;
@@ -25,11 +27,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     NoteViewModel noteViewModel;
     NoteAdapter noteAdapter;
-    Button add;
+    Button logout;
     ListView lv;
     FloatingActionButton addButton;
-
     int userid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("josjos",""+userid);
         lv = findViewById(R.id.listVIewNotes);
         addButton = findViewById(R.id.addButton);
+        logout = findViewById(R.id.btnLogout);
 
         initListView();
 
@@ -72,6 +75,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putBoolean("isChecked", false);
+                editor.commit();
+
+                Intent intent = new Intent(MainActivity.this, loginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void initListView(){
@@ -80,5 +97,9 @@ public class MainActivity extends AppCompatActivity {
         lv.setAdapter(noteAdapter);
     }
 
+    @Override
+    public void onBackPressed(){
+        moveTaskToBack(true);
+    }
 
 }

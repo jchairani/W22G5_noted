@@ -1,6 +1,8 @@
 package com.example.mvvm_run1.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.ActivityNotFoundException;

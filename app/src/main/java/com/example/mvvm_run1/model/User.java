@@ -9,12 +9,33 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     int userid;
 
-    String username;
+    String username, firstname, lastname;
     String userpass;
 
-    public User(String username, String userpass) {
+    public User() {
+    }
+
+    public User(String username, String firstname, String lastname, String userpass) {
         this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.userpass = userpass;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public int getUserid() {

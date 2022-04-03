@@ -1,5 +1,9 @@
 package com.example.mvvm_run1.dao;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -18,4 +22,5 @@ public interface UserDAO {
 
     @Query("SELECT * FROM user_table")
     public List<User> getAllUser();
-}
+
+    }

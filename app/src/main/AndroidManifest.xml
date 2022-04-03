@@ -5,19 +5,29 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="notEd"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mvvmrun1">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.ResetPasswordActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.SignupActivity"
+            android:exported="false"
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true" />
         <activity
             android:name=".activity.noteAcitivity"
             android:exported="false" />
         <activity
             android:name=".activity.loginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
