@@ -69,6 +69,7 @@ public class loginActivity extends AppCompatActivity {
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     List<User> userList = userViewModel.getAllUser();
                     String username = etUsername.getText().toString();
                     String password = etPassword.getText().toString();

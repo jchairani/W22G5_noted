@@ -1,5 +1,6 @@
 package com.example.mvvm_run1.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -8,6 +9,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -102,4 +106,26 @@ public class MainActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.changePassword) {
+            //ke reset password
+            Intent i = new Intent(MainActivity.this, ResetPasswordActivity.class);
+            i.putExtra("userid", userid);
+            //startActivity(i);
+        }
+        else if(item.getItemId() == R.id.logout){
+            Intent i = new Intent(MainActivity.this,loginActivity.class);
+            startActivity(i);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onCreatePanelMenu(int featureId, @NonNull Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu,menu);
+        return true;
+
+    }
 }
