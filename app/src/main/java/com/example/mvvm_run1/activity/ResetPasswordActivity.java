@@ -85,7 +85,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
         resetButton.setOnClickListener(view -> {
             input = editText.getText().toString();
 
-
+            if (userList.isEmpty()) {
+                Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();;
+            }
             if (input.equals("")) {
                 Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
             } else {

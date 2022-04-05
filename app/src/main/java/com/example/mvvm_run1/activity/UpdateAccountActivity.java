@@ -58,6 +58,9 @@ public class UpdateAccountActivity extends AppCompatActivity {
                     Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
                 } else {
                     userList = userViewModel.getAllUser();
+                    if (etFirstName.getText().toString().matches(".*\\d.*") || etLastName.getText().toString().matches(".*\\d.*")) {
+                        Snackbar.make(findViewById(R.id.layout), "Name contains number!\nPlease input alphabetical values.", Snackbar.LENGTH_SHORT).show();
+                    }
                     for (int i = 0; i < userList.size(); i++) {
                         if ((userViewModel.getUsernameById(i).equals(etUsername))) {
                             Snackbar.make(findViewById(R.id.layout), "Username is taken.", Snackbar.LENGTH_SHORT).show();
