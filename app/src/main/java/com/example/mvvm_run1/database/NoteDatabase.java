@@ -21,7 +21,9 @@ public abstract class NoteDatabase extends RoomDatabase {
     public static synchronized NoteDatabase getInstance(Context context){
         if(instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),NoteDatabase.class,
-                    "NoteDatabase").build();
+                    "NoteDatabase")
+                    .allowMainThreadQueries()
+                    .build();
         }
         return instance;
     }

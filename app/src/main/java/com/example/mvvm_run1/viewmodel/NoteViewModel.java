@@ -37,6 +37,9 @@ public class NoteViewModel extends AndroidViewModel {
     public LiveData<List<Note>> getAllNotes(){
         return mnotes;
     }
+    public List<Note> getAllNoteById(int usercreatorid){
+        return repository.getAllNoteById(usercreatorid);
+    }
     public LiveData<String> getNoteTitleByNoteId(int id) {return repository.getNoteTitleByNoteId(id); }
     public LiveData<String> getNoteContentByNoteId(int id) {return repository.getNoteContentByNoteId(id); }
 

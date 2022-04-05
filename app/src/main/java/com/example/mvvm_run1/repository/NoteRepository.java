@@ -54,6 +54,10 @@ public class NoteRepository {
         return mnotes;
     }
 
+    public List<Note> getAllNoteById(int usercreatorid){
+        return dao.getAllNotesById(usercreatorid);
+    }
+
     public LiveData<String> getNoteTitleByNoteId(int id) {
         return dao.getNoteTitleByNoteId(id);
     }

@@ -22,8 +22,11 @@ public interface NoteDAO {
         @Delete
         void deleteNote(Note note);
 
-//        @Query("SELECT * FROM note_table ORDER BY noteid ASC")
-//        LiveData<List<Note>> getAllNotes();
+        @Query("SELECT * FROM note_table WHERE notetitle =:title AND notecontent=:content")
+        List<Note> getNoteByTitleContent(String title,String content);
+
+        @Query("SELECT * FROM note_table WHERE usercreatorid =:usercreatorid")
+        List<Note> getAllNotesById(int usercreatorid);
 
         @Query("SELECT * FROM note_table WHERE usercreatorid =:usercreatorid")
         LiveData<List<Note>> getNotesById(int usercreatorid);

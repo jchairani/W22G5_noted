@@ -69,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent intent1 = new Intent(getApplicationContext(), noteAcitivity.class);
-            intent1.putExtra("position", i + 1);
+            intent1.putExtra("position", i );
+            intent1.putExtra("userid",userid);
             startActivity(intent1);
         });
     }

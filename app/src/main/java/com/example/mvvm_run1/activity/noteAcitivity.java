@@ -16,6 +16,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.CharacterStyle;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,7 +40,7 @@ public class noteAcitivity extends AppCompatActivity {
     Button btnBold, btnItalics, btnUnderline;
     public static boolean boldClicked = false, italicsClicked = false, underlinedClicked = false;
     CharacterStyle styleBold, styleItalic, styleNormal, underline;
-
+    List<Note> notes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,10 +64,17 @@ public class noteAcitivity extends AppCompatActivity {
         styleItalic = new StyleSpan(Typeface.ITALIC);
         underline = new UnderlineSpan();
 
-        if (position != 0) {
-            noteViewModel.getNoteTitleByNoteId(position).observe(this, s -> etTitle.setText(s));
-            noteViewModel.getNoteContentByNoteId(position).observe(this, s -> etContent.setText(s));
-        }
+        notes = noteViewModel.getAllNoteById(userid);
+
+
+        etTitle.setText(notes.get(position).getNotetitle());
+        etContent.setText(notes.get(position).getNotecontent());
+
+
+//        if (position != 0) {
+//            noteViewModel.getNoteTitleByNoteId(position).observe(this, s -> etTitle.setText(s));
+//            noteViewModel.getNoteContentByNoteId(position).observe(this, s -> etContent.setText(s));
+//        }
 
         spchToText.setOnClickListener(view -> {
             Intent intent1 = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -268,6 +276,8 @@ public class noteAcitivity extends AppCompatActivity {
 
         String title = etTitle.getText().toString();
         String content = etContent.getText().toString();
+
+
 
         Note temp = new Note(title, content, userid);
 
