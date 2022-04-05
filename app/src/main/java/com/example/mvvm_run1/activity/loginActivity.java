@@ -87,19 +87,21 @@ public class loginActivity extends AppCompatActivity {
                 if (username.equals("") || password.equals("")) {
                     Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
                 } else {
-                    for (int i = 0; i < userList.size(); i++) {
-                        if (userList.get(i).getUsername().equals(username) && userList.get(i).getUserpass().equals(password)) {
-                            Intent intent = new Intent(loginActivity.this, MainActivity.class);
-                            intent.putExtra("userid", userList.get(i).getUserid());
-                            startActivity(intent);
-                        }
-                        if (userList.get(i).getUsername().equals(username) && !(userList.get(i).getUserpass().equals(password))) {
-                            Snackbar.make(findViewById(R.id.layout), "Wrong password.", Snackbar.LENGTH_SHORT).show();
-                            break;
-                        }
-                        if (!(userViewModel.getUsernameById(i).equals(username))) {
-                            Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
-                            break;
+                    if (userList.isEmpty()) {
+                        Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();;
+                    } else {
+                        for (int i = 0; i < userList.size(); i++) {
+                            if (userList.get(i).getUsername().equals(username) && userList.get(i).getUserpass().equals(password)) {
+                                Intent intent = new Intent(loginActivity.this, MainActivity.class);
+                                intent.putExtra("userid", userList.get(i).getUserid());
+                                startActivity(intent);
+                            } else if (userList.get(i).getUsername().equals(username) && !(userList.get(i).getUserpass().equals(password))) {
+                                Snackbar.make(findViewById(R.id.layout), "Wrong password.", Snackbar.LENGTH_SHORT).show();
+                                break;
+                            } else if (!(userViewModel.getUsernameById(i).equals(username))) {
+                                Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
+                                break;
+                            }
                         }
                     }
                 }
