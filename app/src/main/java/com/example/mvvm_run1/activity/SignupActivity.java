@@ -50,8 +50,7 @@ public class SignupActivity extends AppCompatActivity {
             if (user.equals("") || pass.equals("") || repass.equals("")) {
                 Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
             } else {
-
-                if (usernameCheck(user)==true) {
+                if (usernameCheck(user)==true && !(userList.isEmpty())) {
                     Snackbar.make(findViewById(R.id.layout), "Username is taken.", Snackbar.LENGTH_SHORT).show();
                 }
                 else if (pass.length() > 7) {
