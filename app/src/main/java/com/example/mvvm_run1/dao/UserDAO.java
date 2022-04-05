@@ -48,4 +48,7 @@ public interface UserDAO {
     @Query("SELECT userid from user_table WHERE username = :name")
     public int getIdByUsername(String name);
 
+    @Query("UPDATE user_table SET userpass =:pass WHERE userid=:id")
+    void changePassword(int id,String pass);
+
 }

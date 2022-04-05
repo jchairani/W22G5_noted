@@ -90,6 +90,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
             } else {
                 if (userid > 0) {
+                    Log.d("josjos",""+userid);
                     newpass = editText.getText().toString();
                     matchpass = editText2.getText().toString();
 
@@ -105,7 +106,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                     Snackbar.make(findViewById(R.id.layout), "Password does not match.", Snackbar.LENGTH_SHORT).show();
                                 } else {
                                     if (newpass.length() > 7) {
-                                        userViewModel.updateUser(new User(username, firstname, lastname, newpass));
+                                        //HERE--------------
+                                        userViewModel.changePassword(userid,newpass);
+
                                         Intent intent = new Intent(ResetPasswordActivity.this, MainActivity.class);
                                         intent.putExtra("userid", userid);
                                         intent.putExtra("snackbar", 1);
@@ -178,7 +181,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                                                     Snackbar.make(findViewById(R.id.layout), "Password does not match.", Snackbar.LENGTH_SHORT).show();
                                                                 } else {
                                                                     if (newpass.length() > 7) {
-                                                                        userViewModel.updateUser(new User(username, firstname, lastname, newpass));
+
+                                                                        for(int x=0;x<userList.size();x++){
+                                                                            if(userList.get(x).getUsername().equals(username)){
+                                                                                userViewModel.changePassword(userid+1,newpass);
+                                                                            }
+                                                                        }
                                                                         Intent intent2 = new Intent(ResetPasswordActivity.this, loginActivity.class);
                                                                         intent2.putExtra("snackbar", 1);
                                                                         startActivity(intent2);

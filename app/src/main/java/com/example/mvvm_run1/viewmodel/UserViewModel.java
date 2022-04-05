@@ -47,5 +47,8 @@ public class UserViewModel extends AndroidViewModel {
     public LiveData<String> getUsernameByString(String user){
         return repository.getUsernameByString(user);
     }
+    public void changePassword(int id,String pass){
+        repository.changePassword(id,pass);
+    }
 
 }

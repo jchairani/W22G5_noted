@@ -55,6 +55,16 @@ public class UserRepository {
         return dao.getUsernameByString(user);
     }
 
+    public void changePassword(int id,String pass){
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                dao.changePassword(id,pass);
+            }
+        });
+    }
+
 
 
 }
