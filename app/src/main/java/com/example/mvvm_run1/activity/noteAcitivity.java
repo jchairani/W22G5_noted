@@ -86,55 +86,6 @@ public class noteAcitivity extends AppCompatActivity {
 
     public void buttonBold(View view) {
 
-        String wholeText = etContent.getText().toString();
-        int start = etContent.getSelectionStart();
-        int end = etContent.getSelectionEnd();
-
-        CharacterStyle passedStyle;
-        SpannableStringBuilder sb = new SpannableStringBuilder(wholeText);
-
-        if (boldClicked && italicsClicked && underlinedClicked) {
-            passedStyle = styleNormal;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-            boldClicked = false;
-
-            passedStyle = styleItalic;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-
-            passedStyle = underline;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-        } else if (boldClicked && italicsClicked) {
-            passedStyle = styleNormal;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-            boldClicked = false;
-
-            passedStyle = styleItalic;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-        } else if (boldClicked && underlinedClicked) {
-            passedStyle = styleNormal;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-            boldClicked = false;
-
-            passedStyle = underline;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-        } else if (boldClicked) {
-            passedStyle = styleNormal;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-            boldClicked = false;
-        } else {
-            SpannableStringBuilder spannableString = new SpannableStringBuilder(etContent.getText());
-            spannableString.setSpan(new StyleSpan(Typeface.BOLD), etContent.getSelectionStart(), etContent.getSelectionEnd(), 0);
-            etContent.setText(spannableString);
-            boldClicked = true;
-        }
     }
 
     public void buttonItalics(View view) {
@@ -144,7 +95,7 @@ public class noteAcitivity extends AppCompatActivity {
         CharacterStyle passedStyle;
         SpannableStringBuilder sb = new SpannableStringBuilder(wholeText);
 
-        List<Integer> savedSelection = new ArrayList<Integer>();
+        List<Integer> savedSelection = new ArrayList<>();
 
         italicsClicked = true;
 
@@ -185,22 +136,20 @@ public class noteAcitivity extends AppCompatActivity {
                 etContent.setText(sb);
             } else if (italicsClicked) {
                 if (savedSelection.size() > 0) {
-                    for(int i = 0 ; i < savedSelection.size(); i++){
-                        if(start == savedSelection.get(i)){
-                            passedStyle = styleNormal;
-                            sb.setSpan(passedStyle, start, end, 0);
-                            etContent.setText(sb);
-                            italicsClicked = false;
-                            break;
-                        }
-                    }
-                } else {
-                    SpannableStringBuilder spannableString = new SpannableStringBuilder(etContent.getText());
-                    spannableString.setSpan(new StyleSpan(Typeface.ITALIC), etContent.getSelectionStart(), etContent.getSelectionEnd(), 0);
-                    etContent.setText(spannableString);
-                    savedSelection.add(start);
+                    passedStyle = styleNormal;
+                    sb.setSpan(passedStyle, start, end, 0);
+                    etContent.setText(sb);
+                    italicsClicked = false;
+
                 }
+
+            } else {
+                SpannableStringBuilder spannableString = new SpannableStringBuilder(etContent.getText());
+                spannableString.setSpan(new StyleSpan(Typeface.ITALIC), etContent.getSelectionStart(), etContent.getSelectionEnd(), 0);
+                etContent.setText(spannableString);
+                savedSelection.add(start);
             }
+
         } else {
             italicsClicked = false;
         }

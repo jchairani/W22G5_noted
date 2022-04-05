@@ -50,49 +50,45 @@ public class SignupActivity extends AppCompatActivity {
             if (user.equals("") || pass.equals("") || repass.equals("")) {
                 Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
             } else {
-                if (fname.matches(".*\\d.*") || lname.matches(".*\\d.*")) {
-                    Snackbar.make(findViewById(R.id.layout), "Name contains number!\nPlease input alphabetical values.", Snackbar.LENGTH_SHORT).show();
-                } else {
-                    for (int i = 0; i < userList.size(); i++) {
-                        if (userViewModel.getAllUser().get(i).getUsername().equals(user)) {
-                            Snackbar.make(findViewById(R.id.layout), "Username is taken.", Snackbar.LENGTH_SHORT).show();
-                            break;
-                        } else {
-                            if (pass.equals(repass)) {
-                                if (pass.length() > 7) {
-                                    Snackbar.make(findViewById(R.id.layout), "Successfully registered.", Snackbar.LENGTH_SHORT).show();
-                                    userViewModel.insertUser(new User(user, fname, lname, pass));
 
-                                    SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
-                                    SharedPreferences.Editor editor = settings.edit();
-                                    boolean b = true;
-                                    editor.putBoolean("isChecked", b);
-                                    editor.commit();
+                if (usernameCheck(user)==true) {
+                    Snackbar.make(findViewById(R.id.layout), "Username is taken.", Snackbar.LENGTH_SHORT).show();
+                }
 
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    intent.putExtra("userid", userList.size() + 1);
-                                    startActivity(intent);
-                                } else {
-                                    Snackbar.make(findViewById(R.id.layout), "Password has to be 8 characters minimum.", Snackbar.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Snackbar.make(findViewById(R.id.layout), "Password does not match.", Snackbar.LENGTH_SHORT).show();
-                            }
-                        }
+                if (pass.equals(repass)) {
+                    if (pass.length() > 7) {
+                        Snackbar.make(findViewById(R.id.layout), "Successfully registered.", Snackbar.LENGTH_SHORT).show();
+                        userViewModel.insertUser(new User(user, fname, lname, pass));
+
+                        SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        boolean b = true;
+                        editor.putBoolean("isChecked", b);
+                        editor.commit();
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("userid", userList.size() + 1);
+                        startActivity(intent);
+
+
+                    } else {
+                        Snackbar.make(findViewById(R.id.layout), "Password has to be 8 characters minimum.", Snackbar.LENGTH_SHORT).show();
                     }
-
+                } else {
+                    Snackbar.make(findViewById(R.id.layout), "Password does not match.", Snackbar.LENGTH_SHORT).show();
                 }
             }
+
         });
     }
 
-    public void usernameCheck(String username) {
+    public boolean usernameCheck(String username) {
         for (int i = 0; i < userList.size(); i++) {
-            if (userViewModel.getUsernameById(i).equals(username)) {
-                Snackbar.make(findViewById(R.id.layout), "Username is taken.", Snackbar.LENGTH_SHORT).show();
-                break;
+            if (!(userList.get(i).getUsername().equals(username))) {
+                return false;
             }
         }
+        return true;
     }
 
     @Override
