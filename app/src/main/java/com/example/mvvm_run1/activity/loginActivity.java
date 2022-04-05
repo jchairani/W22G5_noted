@@ -17,17 +17,19 @@ import com.example.mvvm_run1.R;
 import com.example.mvvm_run1.database.NoteDatabase;
 import com.example.mvvm_run1.model.User;
 import com.example.mvvm_run1.viewmodel.UserViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
 public class loginActivity extends AppCompatActivity {
     UserViewModel userViewModel;
-    EditText etUsername;
-    EditText etPassword;
+    EditText etUsername, etPassword;
     Button login;
     TextView signup, reset;
     CheckBox checkBox;
     boolean isChecked;
+    String username, password;
+    List<User> userList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,27 +68,28 @@ public class loginActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         } else {
-            login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            login.setOnClickListener(view -> {
 
-                    List<User> userList = userViewModel.getAllUser();
-                    String username = etUsername.getText().toString();
-                    String password = etPassword.getText().toString();
+                userList = userViewModel.getAllUser();
+                username = etUsername.getText().toString();
+                password = etPassword.getText().toString();
 
-                    if (username.equals("") || password.equals("")) {
-                        Toast.makeText(loginActivity.this, "Input cannot be empty. Please input username or password correctly.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        for (int i = 0; i < userList.size(); i++) {
-                            if (userList.get(i).getUsername().equals(username) && !(userList.get(i).getUserpass().equals(password))) {
-                                Toast.makeText(loginActivity.this, "Wrong password", Toast.LENGTH_SHORT).show();
-                            }
-                            if (userList.get(i).getUsername().equals(username) && userList.get(i).getUserpass().equals(password)) {
-                                Toast.makeText(loginActivity.this, "Successfully logged in.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(loginActivity.this, MainActivity.class);
-                                intent.putExtra("userid", userList.get(i).getUserid());
-                                startActivity(intent);
-                            }
+                if (username.equals("") || password.equals("")) {
+                    Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
+                } else {
+                    for (int i = 0; i < userList.size(); i++) {
+                        if (userList.get(i).getUsername().equals(username) && userList.get(i).getUserpass().equals(password)) {
+                            Intent intent = new Intent(loginActivity.this, MainActivity.class);
+                            intent.putExtra("userid", userList.get(i).getUserid());
+                            startActivity(intent);
+                        }
+                        if (userList.get(i).getUsername().equals(username) && !(userList.get(i).getUserpass().equals(password))) {
+                            Snackbar.make(findViewById(R.id.layout), "Wrong password.", Snackbar.LENGTH_SHORT).show();
+                            break;
+                        }
+                        if(!(userViewModel.getUsernameById(i).equals(username))){
+                            Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
+                            break;
                         }
                     }
                 }

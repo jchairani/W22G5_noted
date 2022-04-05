@@ -16,4 +16,6 @@
     <string name="txtViewName">Name</string>
     <string name="editTextInputFirstName">First Name</string>
     <string name="editTextInputLastName">Last Name</string>
+    <string name="resetHere">Reset password <u>here</u>.</string>
+    <string name="registerHere">Sign up <u>here</u>.</string>
 </resources>

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.loginActivity"
-    android:orientation="vertical"
     android:gravity="center"
-    >
+    android:orientation="vertical"
+    android:id="@+id/layout"
+    tools:context=".activity.loginActivity">
 
     <EditText
         android:id="@+id/etUsername"
@@ -31,13 +31,15 @@
         android:id="@+id/cbSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:text="Keep me signed in." />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="login" />
 
     <TextView
@@ -50,11 +52,12 @@
         android:id="@+id/txtViewSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign up here."
-        android:textAlignment="center"/>
+        android:text="@string/registerHere"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/txtForgotPass"
+        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="\nForgot password?" />
@@ -63,8 +66,8 @@
         android:id="@+id/txtForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reset password here."
-        android:textAlignment="center"/>
+        android:text="@string/resetHere"
+        android:textAlignment="center" />
 
 
 </LinearLayout>

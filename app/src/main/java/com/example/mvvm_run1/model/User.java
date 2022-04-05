@@ -1,16 +1,27 @@
 package com.example.mvvm_run1.model;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "user_table")
+@Entity(tableName = "user_table", indices = @Index(value = {"username"}, unique = true))
 public class User {
 
     @PrimaryKey(autoGenerate = true)
     int userid;
 
-    String username, firstname, lastname;
-    String userpass;
+    @ColumnInfo(name = "username")
+    private String username;
+
+    @ColumnInfo(name = "firstname")
+    private String firstname;
+
+    @ColumnInfo(name = "lastname")
+    private String lastname;
+
+    @ColumnInfo(name = "userpass")
+    private String userpass;
 
     public User() {
     }

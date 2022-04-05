@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout"
     tools:context=".activity.SignupActivity">
 
     <LinearLayout
@@ -19,7 +20,7 @@
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/txtViewCreateAccount"
-            android:textColor="#000"
+            android:textColor="@color/white"
             android:textSize="30sp" />
 
         <TextView
@@ -28,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:text="@string/txtViewName"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
         <EditText
             android:id="@+id/inputFirstName"
@@ -60,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:text="@string/txtViewUsername"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
         <EditText
             android:id="@+id/inputUsername"
@@ -80,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:text="@string/txtViewPassword"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
         <EditText
             android:id="@+id/inputPassword"
@@ -100,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:text="@string/txtViewConfirmPassword"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
         <EditText
             android:id="@+id/inputPasswordConfirm"

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import com.example.mvvm_run1.model.User;
 import com.example.mvvm_run1.repository.UserRepository;
@@ -23,8 +24,28 @@ public class UserViewModel extends AndroidViewModel {
         repository.insertUser(user);
     }
 
+    public void updateUser(User user) {
+        repository.updateUser(user);
+    }
+
     public List<User> getAllUser() {
         return repository.getAllUser();
+    }
+
+    public LiveData<String> getUsernameById(int userid){
+        return repository.getUsernameById(userid);
+    }
+
+    public LiveData<String> getFirstNameById(int userid){
+        return repository.getFirstNameById(userid);
+    }
+
+    public LiveData<String> getLastNameById(int userid){
+        return repository.getLastNameById(userid);
+    }
+
+    public LiveData<String> getUsernameByString(String user){
+        return repository.getUsernameByString(user);
     }
 
 }

@@ -8,17 +8,20 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.mvvm_run1.R;
 import com.example.mvvm_run1.model.User;
 import com.example.mvvm_run1.viewmodel.UserViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
 public class SignupActivity extends AppCompatActivity {
     EditText username, password, repassword, firstname, lastname;
+    String user, pass, repass, fname, lname;
     Button signup;
+    List<User> userList;
+    UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,23 +35,27 @@ public class SignupActivity extends AppCompatActivity {
         lastname = findViewById(R.id.inputLastName);
         signup = findViewById(R.id.btnSignup);
 
-        UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         signup.setOnClickListener(view -> {
-            List<User> userList = userViewModel.getAllUser();
-            String user = username.getText().toString();
-            String pass = password.getText().toString();
-            String repass = repassword.getText().toString();
-            String fname = firstname.getText().toString();
-            String lname = lastname.getText().toString();
+            userList = userViewModel.getAllUser();
+            user = username.getText().toString();
+            pass = password.getText().toString();
+            repass = repassword.getText().toString();
+            fname = firstname.getText().toString();
+            lname = lastname.getText().toString();
 
             if (user.equals("") || pass.equals("") || repass.equals("")) {
-                Toast.makeText(SignupActivity.this, "Input cannot be empty. Please input username or password correctly.", Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
             } else {
+
+                if (usernameCheck(user)==true) {
+                    Snackbar.make(findViewById(R.id.layout), "Username is taken.", Snackbar.LENGTH_SHORT).show();
+                }
+
                 if (pass.equals(repass)) {
                     if (pass.length() > 7) {
-                        Toast.makeText(SignupActivity.this, "Successfully registered.", Toast.LENGTH_SHORT).show();
-
+                        Snackbar.make(findViewById(R.id.layout), "Successfully registered.", Snackbar.LENGTH_SHORT).show();
                         userViewModel.insertUser(new User(user, fname, lname, pass));
 
                         SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
@@ -63,14 +70,23 @@ public class SignupActivity extends AppCompatActivity {
 
 
                     } else {
-                        Toast.makeText(SignupActivity.this, "Password has to be 8 characters minimum.", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(findViewById(R.id.layout), "Password has to be 8 characters minimum.", Snackbar.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(SignupActivity.this, "Password does not match! Please try again.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(R.id.layout), "Password does not match.", Snackbar.LENGTH_SHORT).show();
                 }
             }
 
         });
+    }
+
+    public boolean usernameCheck(String username) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (!(userList.get(i).getUsername().equals(username))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

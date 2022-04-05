@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, noteAcitivity.class);
                 i.putExtra("userid",userid);
                 startActivity(i);
-
             }
         });
 
@@ -80,19 +79,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putBoolean("isChecked", false);
-                editor.commit();
-
-                Intent intent = new Intent(MainActivity.this, loginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+//                SharedPreferences.Editor editor = settings.edit();
+//                editor.putBoolean("isChecked", false);
+//                editor.commit();
+//
+//                Intent intent = new Intent(MainActivity.this, loginActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
     }
 
     private void initListView(){
@@ -109,14 +108,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.changePassword) {
-            //ke reset password
             Intent i = new Intent(MainActivity.this, ResetPasswordActivity.class);
             i.putExtra("userid", userid);
-            //startActivity(i);
+            startActivity(i);
         }
         else if(item.getItemId() == R.id.logout){
-            Intent i = new Intent(MainActivity.this,loginActivity.class);
-            startActivity(i);
+            SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("isChecked", false);
+            editor.commit();
+
+            Intent intent = new Intent(MainActivity.this, loginActivity.class);
+            startActivity(intent);
+            finish();
         }
         return true;
     }
