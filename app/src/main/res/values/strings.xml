@@ -11,7 +11,7 @@
     <string name="editTxtInputPassword">Password</string>
     <string name="txtViewConfirmPassword">Re-enter password</string>
     <string name="editTxtPasswordConfirm">Password</string>
-    <string name="BtnSignup">SIgn Up</string>
+    <string name="BtnSignup">Sign Up</string>
     <string name="btnLogOut">Log Out</string>
     <string name="txtViewName">Name</string>
     <string name="editTextInputFirstName">First Name</string>

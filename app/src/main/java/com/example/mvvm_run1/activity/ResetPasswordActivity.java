@@ -32,7 +32,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     UserViewModel userViewModel;
     String input, newpass, matchpass, firstname, lastname, username;
     List<User> userList;
-    int userid;
+    int userid, fromLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         Intent getIntent = getIntent();
         userid = getIntent.getIntExtra("userid", 0);
+        fromLogin = getIntent.getIntExtra("fromLogin", 0);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
@@ -92,8 +93,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                 } else {
                                     if (newpass.length() > 7) {
                                         userViewModel.updateUser(new User(username, firstname, lastname, newpass));
-                                        Snackbar.make(findViewById(R.id.layout), "Password changed.", Snackbar.LENGTH_SHORT).show();
                                         Intent intent = new Intent(ResetPasswordActivity.this, MainActivity.class);
+                                        intent.putExtra("userid", userid);
+                                        intent.putExtra("snackbar", 1);
                                         startActivity(intent);
                                     } else {
                                         Snackbar.make(findViewById(R.id.layout), "Password has to be 8 characters minimum.", Snackbar.LENGTH_SHORT).show();
@@ -164,8 +166,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                                                 } else {
                                                                     if (newpass.length() > 7) {
                                                                         userViewModel.updateUser(new User(username, firstname, lastname, newpass));
-                                                                        Snackbar.make(findViewById(R.id.layout), "Password changed. Please log in to continue.", Snackbar.LENGTH_SHORT).show();
                                                                         Intent intent2 = new Intent(ResetPasswordActivity.this, loginActivity.class);
+                                                                        intent2.putExtra("snackbar", 1);
                                                                         startActivity(intent2);
                                                                     } else {
                                                                         Snackbar.make(findViewById(R.id.layout), "Password has to be 8 characters minimum.", Snackbar.LENGTH_SHORT).show();
@@ -193,5 +195,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(fromLogin == 1){
+            Intent intent = new Intent(ResetPasswordActivity.this, loginActivity.class);
+            startActivity(intent);
+        }
     }
 }
