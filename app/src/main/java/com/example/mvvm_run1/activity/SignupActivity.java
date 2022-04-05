@@ -54,9 +54,8 @@ public class SignupActivity extends AppCompatActivity {
                 if (usernameCheck(user)==true) {
                     Snackbar.make(findViewById(R.id.layout), "Username is taken.", Snackbar.LENGTH_SHORT).show();
                 }
-
-                if (pass.equals(repass)) {
-                    if (pass.length() > 7) {
+                else if (pass.length() > 7) {
+                    if (pass.equals(repass)) {
                         Snackbar.make(findViewById(R.id.layout), "Successfully registered.", Snackbar.LENGTH_SHORT).show();
                         userViewModel.insertUser(new User(user, fname, lname, pass));
 
@@ -72,10 +71,10 @@ public class SignupActivity extends AppCompatActivity {
 
 
                     } else {
-                        Snackbar.make(findViewById(R.id.layout), "Password has to be 8 characters minimum.", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(findViewById(R.id.layout), "Password does not match.", Snackbar.LENGTH_SHORT).show();
                     }
                 } else {
-                    Snackbar.make(findViewById(R.id.layout), "Password does not match.", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(R.id.layout), "Password has to be 8 characters minimum.", Snackbar.LENGTH_SHORT).show();
                 }
             }
 

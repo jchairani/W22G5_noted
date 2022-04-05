@@ -132,6 +132,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                             txtView.setText("Enter first name");
                             editText.setText("");
                             editText.setHint("First name");
+                            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
                             int finalI = i;
 
@@ -148,6 +149,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                         txtView.setText("Enter last name");
                                         editText.setText("");
                                         editText.setHint("Last name");
+                                        editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
                                         resetButton.setOnClickListener(view2 -> {
                                             input = editText.getText().toString();

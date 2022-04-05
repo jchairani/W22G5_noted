@@ -40,7 +40,7 @@
         android:layout_marginBottom="24dp"
         android:hint="@string/editTextInputFirstName"
         android:importantForAutofill="no"
-        android:inputType="text"
+        android:inputType="textCapWords"
         android:minHeight="48dp"
         tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
 
@@ -52,7 +52,7 @@
         android:layout_marginBottom="24dp"
         android:hint="@string/editTextInputLastName"
         android:importantForAutofill="no"
-        android:inputType="text"
+        android:inputType="textCapWords"
         android:minHeight="48dp"
         tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
 
