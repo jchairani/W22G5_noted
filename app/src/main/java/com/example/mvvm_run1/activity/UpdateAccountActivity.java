@@ -43,6 +43,10 @@ public class UpdateAccountActivity extends AppCompatActivity {
         Intent getIntent = getIntent();
         userid = getIntent.getIntExtra("userid", 0);
 
+//        username = userViewModel.getUserById(userid).getUsername();
+//        firstname = userViewModel.getUserById(userid).getFirstname();
+//        lastname = userViewModel.getUserById(userid).getLastname();
+
         userViewModel.getUsernameById(userid).observe(this, s -> etUsername.setText(s));
         userViewModel.getFirstNameById(userid).observe(this, s -> etFirstName.setText(s));
         userViewModel.getLastNameById(userid).observe(this, s -> etLastName.setText(s));

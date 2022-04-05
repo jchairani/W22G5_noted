@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.mvvm_run1.R;
 import com.example.mvvm_run1.dao.UserDAO;
+import com.example.mvvm_run1.database.NoteDatabase;
 import com.example.mvvm_run1.model.User;
 import com.example.mvvm_run1.viewmodel.UserViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -34,9 +36,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
     List<User> userList;
     int userid, fromLogin;
 
+    private static ResetPasswordActivity instance;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
 
         Intent getIntent = getIntent();
         userid = getIntent.getIntExtra("userid", 0);
@@ -51,7 +58,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
         editText = findViewById(R.id.editTextReset);
         editText2 = findViewById(R.id.etPassword);
 
-        ContentValues cv = new ContentValues();
+        userList = userViewModel.getAllUser();
+
 
         if (userid > 0) {
             editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
@@ -64,14 +72,19 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
             resetButton.setText("Change password");
 
-            userViewModel.getUsernameById(userid).observe(this, s -> username = s);
-            userViewModel.getFirstNameById(userid).observe(this, s -> firstname = s);
-            userViewModel.getLastNameById(userid).observe(this, s -> lastname = s);
+            username = userList.get(userid-1).getUsername();
+            firstname = userList.get(userid-1).getFirstname();
+            lastname = userList.get(userid-1).getLastname();
+            Log.d("josjos",username);
+
+//            userViewModel.getUsernameById(userid).observe(this, s -> username = s);
+//            userViewModel.getFirstNameById(userid).observe(this, s -> firstname = s);
+//            userViewModel.getLastNameById(userid).observe(this, s -> lastname = s);
         }
 
         resetButton.setOnClickListener(view -> {
             input = editText.getText().toString();
-            userList = userViewModel.getAllUser();
+
 
             if (input.equals("")) {
                 Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
