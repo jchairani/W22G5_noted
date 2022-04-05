@@ -7,11 +7,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mvvm_run1.R;
@@ -25,7 +31,10 @@ public class noteAcitivity extends AppCompatActivity {
     EditText etTitle;
     EditText etContent;
     ImageView spchToText;
-    int userid;
+    int userid, startSelection, endSelection;
+    Button btnBold, btnItalics, btnUnderline;
+    String text, selectedText;
+    SpannableString span;
 
     int position = 0;
 
@@ -41,6 +50,27 @@ public class noteAcitivity extends AppCompatActivity {
         etTitle = findViewById(R.id.editTextTitle);
         etContent = findViewById(R.id.editTextContent);
         spchToText = findViewById(R.id.imgViewSpeechToTxt);
+        btnBold = findViewById(R.id.btnBold);
+        btnItalics = findViewById(R.id.btnItalics);
+        btnUnderline = findViewById(R.id.btnUnderline);
+
+        text = etContent.getText().toString();
+        startSelection = etContent.getSelectionStart();
+        endSelection = etContent.getSelectionEnd();
+        selectedText = etContent.getText().toString().substring(startSelection, endSelection);
+
+        span = new SpannableString(text);
+
+        if (btnBold.isSelected()) {
+            span.setSpan(new StyleSpan(Typeface.BOLD), startSelection, endSelection, 0);
+        }
+        if (btnItalics.isPressed()) {
+            span.setSpan(new StyleSpan(Typeface.ITALIC), startSelection, endSelection, 0);
+        }
+        if (btnUnderline.isPressed()) {
+            span.setSpan(new UnderlineSpan(), startSelection, endSelection, 0);
+        }
+        etContent.setText(span, TextView.BufferType.SPANNABLE);
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
 
@@ -69,7 +99,7 @@ public class noteAcitivity extends AppCompatActivity {
 
                 try {
                     startActivityForResult(intent, 10);
-                }catch (ActivityNotFoundException ex){
+                } catch (ActivityNotFoundException ex) {
                     Toast.makeText(noteAcitivity.this, "Your device Does Not Support Speech Input", Toast.LENGTH_SHORT).show();
                     ex.printStackTrace();
                 }
@@ -119,8 +149,8 @@ public class noteAcitivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10 ){
-            if (requestCode == RESULT_OK && data != null){
+        if (requestCode == 10) {
+            if (requestCode == RESULT_OK && data != null) {
                 etContent.setText(data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0));
             }
         }

@@ -59,32 +59,26 @@ public class UpdateAccountActivity extends AppCompatActivity {
                             Snackbar.make(findViewById(R.id.layout), "Username is taken.", Snackbar.LENGTH_SHORT).show();
                             break;
                         } else {
-                            AlertDialog.Builder builder1 = new AlertDialog.Builder(UpdateAccountActivity.this);
-                            builder1.setMessage("Do you want to change your username to " + etUsername.getText().toString() + "?");
-                            builder1.setCancelable(true);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(UpdateAccountActivity.this);
+                            builder.setMessage("Do you want to change your username to " + etUsername.getText().toString() + "?");
+                            builder.setCancelable(true);
 
-                            builder1.setPositiveButton(
+                            builder.setPositiveButton(
                                     "Yes",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                            Intent intent = new Intent(UpdateAccountActivity.this, MainActivity.class);
-                                            intent.putExtra("userid", userid);
-                                            intent.putExtra("snackbar", 2);
-                                            startActivity(intent);
-                                        }
+                                    (dialog, id) -> {
+                                        dialog.cancel();
+                                        Intent intent = new Intent(UpdateAccountActivity.this, MainActivity.class);
+                                        intent.putExtra("userid", userid);
+                                        intent.putExtra("snackbar", 2);
+                                        startActivity(intent);
                                     });
 
-                            builder1.setNegativeButton(
+                            builder.setNegativeButton(
                                     "No",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    });
+                                    (dialog, id) -> dialog.cancel());
 
-                            AlertDialog alert11 = builder1.create();
-                            alert11.show();
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
                         }
                     }
                 }
