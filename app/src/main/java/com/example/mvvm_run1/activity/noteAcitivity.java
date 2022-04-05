@@ -41,6 +41,8 @@ public class noteAcitivity extends AppCompatActivity {
     public static boolean boldClicked = false, italicsClicked = false, underlinedClicked = false;
     CharacterStyle styleBold, styleItalic, styleNormal, underline;
     List<Note> notes;
+    int noteId;
+    boolean hasNote;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ public class noteAcitivity extends AppCompatActivity {
         Intent intent = getIntent();
         userid = intent.getIntExtra("userid", 0);
         position = intent.getIntExtra("position", 0);
+        hasNote = intent.getBooleanExtra("hasNote",false);
 
         etTitle = findViewById(R.id.editTextTitle);
         etContent = findViewById(R.id.editTextContent);
@@ -66,15 +69,14 @@ public class noteAcitivity extends AppCompatActivity {
 
         notes = noteViewModel.getAllNoteById(userid);
 
-
-        etTitle.setText(notes.get(position).getNotetitle());
-        etContent.setText(notes.get(position).getNotecontent());
-
-
-//        if (position != 0) {
-//            noteViewModel.getNoteTitleByNoteId(position).observe(this, s -> etTitle.setText(s));
-//            noteViewModel.getNoteContentByNoteId(position).observe(this, s -> etContent.setText(s));
-//        }
+        if(hasNote){
+            etTitle.setText(notes.get(position).getNotetitle());
+            etContent.setText(notes.get(position).getNotecontent());
+            noteId = notes.get(position).getNoteid();
+        }else{
+            etTitle.setText("");
+            etContent.setText("");
+        }
 
         spchToText.setOnClickListener(view -> {
             Intent intent1 = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -271,22 +273,34 @@ public class noteAcitivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(noteAcitivity.this, MainActivity.class);
-        i.putExtra("userid", userid);
+
 
         String title = etTitle.getText().toString();
         String content = etContent.getText().toString();
 
-
-
         Note temp = new Note(title, content, userid);
 
-        if (!(title.equals("") && content.equals(""))) {
-            if (position == 0) {
-                noteViewModel.insertNote(temp);
+        Log.d("josjos",""+hasNote);
+
+        if(hasNote){
+            if (!(title.equals("") && content.equals(""))) {
+                noteViewModel.updateNoteById(title,content,noteId);
+                Intent i = new Intent(noteAcitivity.this, MainActivity.class);
+                i.putExtra("userid", userid);
                 startActivity(i);
             }
+        }else{
+            if (!(title.equals("") && content.equals(""))) {
+
+                    Intent i = new Intent(noteAcitivity.this, MainActivity.class);
+                    i.putExtra("userid", userid);
+                    noteViewModel.insertNote(temp);
+                    startActivity(i);
+
+            }
         }
+
+
         super.onBackPressed();
     }
 

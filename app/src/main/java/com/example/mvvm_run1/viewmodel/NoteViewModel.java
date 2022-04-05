@@ -22,7 +22,7 @@ public class NoteViewModel extends AndroidViewModel {
         super(application);
 
         repository = new NoteRepository(application);
-//        mnotes = repository.getAllNotes();
+
     }
 
     public void insertNote(Note note){
@@ -43,5 +43,7 @@ public class NoteViewModel extends AndroidViewModel {
     public LiveData<String> getNoteTitleByNoteId(int id) {return repository.getNoteTitleByNoteId(id); }
     public LiveData<String> getNoteContentByNoteId(int id) {return repository.getNoteContentByNoteId(id); }
 
-
+    public void updateNoteById(String title, String content, int id){
+        repository.updateNoteById(title,content,id);
+    }
 }

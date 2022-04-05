@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent1 = new Intent(getApplicationContext(), noteAcitivity.class);
             intent1.putExtra("position", i );
             intent1.putExtra("userid",userid);
+            intent1.putExtra("hasNote",true);
             startActivity(intent1);
         });
     }

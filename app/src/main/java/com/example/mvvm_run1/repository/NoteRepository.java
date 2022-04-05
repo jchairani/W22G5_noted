@@ -66,4 +66,15 @@ public class NoteRepository {
         return dao.getNoteContentByNoteId(id);
     }
 
+    public void updateNoteById(String title, String content, int id){
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                dao.updateNoteById(title,content,id);
+            }
+        });
+    }
+
 }
