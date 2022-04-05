@@ -97,10 +97,8 @@ public class loginActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else if (userList.get(i).getUsername().equals(username) && !(userList.get(i).getUserpass().equals(password))) {
                                 Snackbar.make(findViewById(R.id.layout), "Wrong password.", Snackbar.LENGTH_SHORT).show();
-                                break;
                             } else if (!(userViewModel.getUsernameById(i).equals(username))) {
                                 Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
-                                break;
                             }
                         }
                     }
