@@ -53,15 +53,15 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public void changeUsername(int id,String user){
-        repository.changePassword(id,user);
+        repository.changeUsername(id,user);
     }
 
     public void changeLastName(int id,String lname){
-        repository.changePassword(id,lname);
+        repository.changeLastName(id,lname);
     }
 
     public  void changeFirstName(int id,String fname){
-        repository.changePassword(id,fname);
+        repository.changeFirstName(id,fname);
     }
 
 }

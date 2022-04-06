@@ -22,7 +22,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
 
 public class UpdateAccountActivity extends AppCompatActivity {
-    int userid, position;
+    int userid, position, change;
     Button btnUpdate;
     EditText etFirstName, etLastName, etUsername;
     UserViewModel userViewModel;
@@ -126,14 +126,14 @@ public class UpdateAccountActivity extends AppCompatActivity {
                         }
 
                         if (!(etLastName.getText().toString().equals(lastname))) {
-                            builder.setMessage("Do you want to change your first name to " + etLastName.getText().toString() + "?");
+                            builder.setMessage("Do you want to change your last name to " + etLastName.getText().toString() + "?");
                             builder.setCancelable(true);
 
                             builder.setPositiveButton(
                                     "Yes",
                                     (dialog, id) -> {
                                         dialog.cancel();
-                                        userViewModel.changeFirstName(userid, etLastName.getText().toString());
+                                        userViewModel.changeLastName(userid, etLastName.getText().toString());
                                     });
 
                             builder.setNegativeButton(
@@ -144,10 +144,7 @@ public class UpdateAccountActivity extends AppCompatActivity {
                             alertDialog.show();
                         }
 
-                        Intent intent = new Intent(UpdateAccountActivity.this, MainActivity.class);
-                        intent.putExtra("userid", userid);
-                        intent.putExtra("snackbar", 2);
-                        startActivity(intent);
+
 
                     }
 
