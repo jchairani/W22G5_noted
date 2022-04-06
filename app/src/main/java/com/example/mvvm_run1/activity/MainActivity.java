@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -86,8 +87,10 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                 noteViewModel.deleteNoteById(item_pos);
-                                 noteAdapter.notifyDataSetChanged();
+                                List<Note> notes = noteViewModel.getAllNoteById(userid);
+                                int deleteId = notes.get(item_pos).getNoteid();
+                                noteViewModel.deleteNoteById(deleteId);
+                                noteAdapter.notifyDataSetChanged();
                             }
                         })
                         .setNegativeButton("No",null)

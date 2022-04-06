@@ -48,4 +48,8 @@ public class NoteViewModel extends AndroidViewModel {
     }
 
     public void deleteNoteById(int id){ repository.deleteNoteById(id);}
+
+    public List<Note> findAllNotes(){
+        return repository.findAllNotes();
+    }
 }

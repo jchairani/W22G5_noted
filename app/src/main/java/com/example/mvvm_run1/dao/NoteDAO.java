@@ -22,6 +22,9 @@ public interface        NoteDAO {
         @Delete
         void deleteNote(Note note);
 
+        @Query("SELECT * FROM note_table")
+        List<Note> findAllNotes();
+
         @Query("SELECT * FROM note_table WHERE notetitle =:title AND notecontent=:content")
         List<Note> getNoteByTitleContent(String title,String content);
 

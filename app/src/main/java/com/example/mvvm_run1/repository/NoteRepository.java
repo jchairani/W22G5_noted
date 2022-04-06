@@ -88,4 +88,8 @@ public class NoteRepository {
         });
     }
 
+    public List<Note> findAllNotes(){
+        return dao.findAllNotes();
+    }
+
 }
