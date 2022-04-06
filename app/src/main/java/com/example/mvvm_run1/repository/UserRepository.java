@@ -81,5 +81,8 @@ public class UserRepository {
         executorService.execute(() -> dao.changeFirstName(id, fname));
     }
 
+    public int getIdByUsername(String name){
+        return dao.getIdByUsername(name);
+    }
 
 }

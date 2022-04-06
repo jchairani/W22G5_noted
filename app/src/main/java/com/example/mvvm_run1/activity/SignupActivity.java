@@ -65,7 +65,7 @@ public class SignupActivity extends AppCompatActivity {
                         editor.commit();
 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.putExtra("userid", userList.size() + 1);
+                        intent.putExtra("userid", userViewModel.getIdByUsername(user));
                         startActivity(intent);
 
 

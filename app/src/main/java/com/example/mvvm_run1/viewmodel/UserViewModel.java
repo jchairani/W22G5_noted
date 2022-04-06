@@ -60,8 +60,13 @@ public class UserViewModel extends AndroidViewModel {
         repository.changeLastName(id,lname);
     }
 
-    public  void changeFirstName(int id,String fname){
+    public void changeFirstName(int id,String fname){
         repository.changeFirstName(id,fname);
     }
+
+    public int getIdByUsername(String name){
+        return repository.getIdByUsername(name);
+    }
+
 
 }
