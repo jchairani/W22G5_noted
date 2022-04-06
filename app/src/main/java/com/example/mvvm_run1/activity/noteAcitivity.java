@@ -257,9 +257,7 @@ public class noteAcitivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10) {
-            if (requestCode == RESULT_OK && data != null) {
                 etContent.setText(data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0));
-            }
         }
     }
 
