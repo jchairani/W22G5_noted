@@ -77,4 +77,15 @@ public class NoteRepository {
         });
     }
 
+    public void deleteNoteById(int id){
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                dao.deleteNoteById(id);
+            }
+        });
+    }
+
 }
