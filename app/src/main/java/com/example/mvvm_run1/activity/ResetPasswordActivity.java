@@ -106,7 +106,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                     Snackbar.make(findViewById(R.id.layout), "Password does not match.", Snackbar.LENGTH_SHORT).show();
                                 } else {
                                     if (newpass.length() > 7) {
-                                        userid = userList.get(i).getUserid();
                                         userViewModel.changePassword(userid, newpass);
 
                                         Intent intent = new Intent(ResetPasswordActivity.this, MainActivity.class);
@@ -186,6 +185,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                                                     Snackbar.make(findViewById(R.id.layout), "Password does not match.", Snackbar.LENGTH_SHORT).show();
                                                                 } else {
                                                                     if (newpass.length() > 7) {
+                                                                        userid = userList.get(finalI).getUserid();
                                                                         userViewModel.changePassword(userid, newpass);
 
                                                                         Intent intent2 = new Intent(ResetPasswordActivity.this, loginActivity.class);
