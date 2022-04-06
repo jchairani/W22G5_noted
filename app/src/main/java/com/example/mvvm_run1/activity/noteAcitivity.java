@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -40,11 +41,9 @@ public class noteAcitivity extends AppCompatActivity {
     NoteViewModel noteViewModel;
     EditText etTitle, etContent;
     ImageButton spchToText, btnBold, btnItalics, btnUnderline, btnCenter, btnLeft, btnRight;
-    int userid, position = 0, count1 = 0, count2 = 0, count3 = 0;
-    public static boolean boldClicked = false, italicsClicked = false, underlinedClicked = false;
-    CharacterStyle styleBold, styleItalic, styleNormal, underline;
     List<Note> notes;
-    int noteId;
+    String storedContent;
+    int userid, noteId, position = 0;
     boolean hasNote;
 
     @Override
@@ -71,17 +70,14 @@ public class noteAcitivity extends AppCompatActivity {
         btnRight = findViewById(R.id.btnRight);
         btnLeft = findViewById(R.id.btnLeft);
 
-        styleBold = new StyleSpan(Typeface.BOLD);
-        styleNormal = new StyleSpan(Typeface.NORMAL);
-        styleItalic = new StyleSpan(Typeface.ITALIC);
-        underline = new UnderlineSpan();
-
         notes = noteViewModel.getAllNoteById(userid);
 
         if (hasNote) {
+            noteId = notes.get(position).getNoteid();
             etTitle.setText(notes.get(position).getNotetitle());
             etContent.setText(notes.get(position).getNotecontent());
-            noteId = notes.get(position).getNoteid();
+            storedContent = etContent.getText().toString();
+            etContent.setText(Html.fromHtml(storedContent));
         } else {
             etTitle.setText("");
             etContent.setText("");
@@ -117,9 +113,7 @@ public class noteAcitivity extends AppCompatActivity {
         Spannable spannableString = new SpannableStringBuilder(etContent.getText());
         spannableString.setSpan(new StyleSpan(Typeface.BOLD), etContent.getSelectionStart(), etContent.getSelectionEnd(), 0);
         etContent.setText(spannableString);
-
     }
-
 
     public void buttonItalics(View view) {
         Spannable spannableString = new SpannableStringBuilder(etContent.getText());
@@ -169,7 +163,7 @@ public class noteAcitivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         String title = etTitle.getText().toString();
-        String content = etContent.getText().toString();
+        String content = Html.toHtml(etContent.getText());
 
         Note temp = new Note(title, content, userid);
 

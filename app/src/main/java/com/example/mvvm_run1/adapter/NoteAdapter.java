@@ -1,5 +1,6 @@
 package com.example.mvvm_run1.adapter;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class NoteAdapter extends BaseAdapter {
     private List<Note> notes;
+    private String storedContent;
 
     public NoteAdapter(List<Note> notes){
         this.notes = notes;
@@ -49,6 +51,10 @@ public class NoteAdapter extends BaseAdapter {
 
         title.setText(notes.get(i).getNotetitle());
         content.setText(notes.get(i).getNotecontent());
+
+        storedContent = content.getText().toString();
+        content.setText(Html.fromHtml(storedContent));
+
         return view;
     }
 }
