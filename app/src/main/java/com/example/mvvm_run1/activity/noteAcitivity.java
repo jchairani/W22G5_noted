@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,14 +36,14 @@ import java.util.Locale;
 public class noteAcitivity extends AppCompatActivity {
     NoteViewModel noteViewModel;
     EditText etTitle, etContent;
-    ImageView spchToText;
+    ImageButton spchToText, btnBold, btnItalics, btnUnderline, btnCenter, btnLeft, btnRight;
     int userid, position = 0, count1 = 0, count2 = 0, count3 = 0;
-    Button btnBold, btnItalics, btnUnderline;
     public static boolean boldClicked = false, italicsClicked = false, underlinedClicked = false;
     CharacterStyle styleBold, styleItalic, styleNormal, underline;
     List<Note> notes;
     int noteId;
     boolean hasNote;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,7 @@ public class noteAcitivity extends AppCompatActivity {
         Intent intent = getIntent();
         userid = intent.getIntExtra("userid", 0);
         position = intent.getIntExtra("position", 0);
-        hasNote = intent.getBooleanExtra("hasNote",false);
+        hasNote = intent.getBooleanExtra("hasNote", false);
 
         etTitle = findViewById(R.id.editTextTitle);
         etContent = findViewById(R.id.editTextContent);
@@ -61,6 +62,9 @@ public class noteAcitivity extends AppCompatActivity {
         btnBold = findViewById(R.id.btnBold);
         btnItalics = findViewById(R.id.btnItalics);
         btnUnderline = findViewById(R.id.btnUnderline);
+        btnCenter = findViewById(R.id.btnCenter);
+        btnRight = findViewById(R.id.btnRight);
+        btnLeft = findViewById(R.id.btnLeft);
 
         styleBold = new StyleSpan(Typeface.BOLD);
         styleNormal = new StyleSpan(Typeface.NORMAL);
@@ -69,11 +73,11 @@ public class noteAcitivity extends AppCompatActivity {
 
         notes = noteViewModel.getAllNoteById(userid);
 
-        if(hasNote){
+        if (hasNote) {
             etTitle.setText(notes.get(position).getNotetitle());
             etContent.setText(notes.get(position).getNotecontent());
             noteId = notes.get(position).getNoteid();
-        }else{
+        } else {
             etTitle.setText("");
             etContent.setText("");
         }
@@ -94,162 +98,57 @@ public class noteAcitivity extends AppCompatActivity {
 
     }
 
+    public void buttonCenter(View view) {
+
+    }
+
+    public void buttonLeft(View view) {
+
+    }
+
+    public void buttonRight(View view) {
+
+    }
+
     public void buttonBold(View view) {
 
     }
 
     public void buttonItalics(View view) {
 
-        String wholeText = etContent.getText().toString();
-
-        CharacterStyle passedStyle;
-        SpannableStringBuilder sb = new SpannableStringBuilder(wholeText);
-
-        List<Integer> savedSelection = new ArrayList<>();
-
-        italicsClicked = true;
-
-        if (etContent.hasSelection()) {
-            int start = etContent.getSelectionStart();
-            int end = etContent.getSelectionEnd();
-
-            if (boldClicked && italicsClicked && underlinedClicked) {
-                passedStyle = styleNormal;
-                sb.setSpan(passedStyle, start, end, 0);
-                etContent.setText(sb);
-                italicsClicked = false;
-
-                passedStyle = styleBold;
-                sb.setSpan(passedStyle, start, end, 0);
-                etContent.setText(sb);
-
-                passedStyle = underline;
-                sb.setSpan(passedStyle, start, end, 0);
-                etContent.setText(sb);
-            } else if (boldClicked && italicsClicked) {
-                passedStyle = styleNormal;
-                sb.setSpan(passedStyle, start, end, 0);
-                etContent.setText(sb);
-                italicsClicked = false;
-
-                passedStyle = styleBold;
-                sb.setSpan(passedStyle, start, end, 0);
-                etContent.setText(sb);
-            } else if (italicsClicked && underlinedClicked) {
-                passedStyle = styleNormal;
-                sb.setSpan(passedStyle, start, end, 0);
-                etContent.setText(sb);
-                italicsClicked = false;
-
-                passedStyle = underline;
-                sb.setSpan(passedStyle, start, end, 0);
-                etContent.setText(sb);
-            } else if (italicsClicked) {
-                if (savedSelection.size() > 0) {
-                    passedStyle = styleNormal;
-                    sb.setSpan(passedStyle, start, end, 0);
-                    etContent.setText(sb);
-                    italicsClicked = false;
-
-                }
-
-            } else {
-                SpannableStringBuilder spannableString = new SpannableStringBuilder(etContent.getText());
-                spannableString.setSpan(new StyleSpan(Typeface.ITALIC), etContent.getSelectionStart(), etContent.getSelectionEnd(), 0);
-                etContent.setText(spannableString);
-                savedSelection.add(start);
-            }
-
-        } else {
-            italicsClicked = false;
-        }
-
 
     }
 
     public void buttonUnderline(View view) {
 
-        String wholeText = etContent.getText().toString();
-        int start = etContent.getSelectionStart();
-        int end = etContent.getSelectionEnd();
-
-        CharacterStyle passedStyle;
-        SpannableStringBuilder sb = new SpannableStringBuilder(wholeText);
-
-        if (boldClicked && italicsClicked && underlinedClicked) {
-            passedStyle = styleNormal;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-            boldClicked = false;
-
-            passedStyle = styleBold;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-
-            passedStyle = styleItalic;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-        } else if (underlinedClicked && italicsClicked) {
-            passedStyle = styleNormal;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-            boldClicked = false;
-
-            passedStyle = styleItalic;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-        } else if (boldClicked && underlinedClicked) {
-            passedStyle = styleNormal;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-            boldClicked = false;
-
-            passedStyle = styleBold;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-        } else if (underlinedClicked) {
-            passedStyle = styleNormal;
-            sb.setSpan(passedStyle, start, end, 0);
-            etContent.setText(sb);
-            italicsClicked = false;
-        } else {
-            SpannableStringBuilder spannableString = new SpannableStringBuilder(etContent.getText());
-            spannableString.setSpan(new UnderlineSpan(), etContent.getSelectionStart(), etContent.getSelectionEnd(), 0);
-            etContent.setText(spannableString);
-            italicsClicked = true;
-        }
     }
 
     @Override
     public void onBackPressed() {
-
-
         String title = etTitle.getText().toString();
         String content = etContent.getText().toString();
 
         Note temp = new Note(title, content, userid);
 
-        Log.d("josjos",""+hasNote);
+        Log.d("josjos", "" + hasNote);
 
-        if(hasNote){
+        if (hasNote) {
             if (!(title.equals("") && content.equals(""))) {
-                noteViewModel.updateNoteById(title,content,noteId);
+                noteViewModel.updateNoteById(title, content, noteId);
                 Intent i = new Intent(noteAcitivity.this, MainActivity.class);
                 i.putExtra("userid", userid);
                 startActivity(i);
             }
-        }else{
+        } else {
             if (!(title.equals("") && content.equals(""))) {
 
-                    Intent i = new Intent(noteAcitivity.this, MainActivity.class);
-                    i.putExtra("userid", userid);
-                    noteViewModel.insertNote(temp);
-                    startActivity(i);
+                Intent i = new Intent(noteAcitivity.this, MainActivity.class);
+                i.putExtra("userid", userid);
+                noteViewModel.insertNote(temp);
+                startActivity(i);
 
             }
         }
-
-
         super.onBackPressed();
     }
 
@@ -257,7 +156,7 @@ public class noteAcitivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10) {
-                etContent.setText(data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0));
+            etContent.setText(data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0));
         }
     }
 

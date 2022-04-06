@@ -17,13 +17,13 @@
             android:id="@+id/editTextTitle"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="@string/editTxtTitle"
-            android:padding="10dp"
-            android:textStyle="bold"
-            android:inputType="textCapWords"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
+            android:hint="@string/editTxtTitle"
+            android:inputType="textCapWords"
+            android:padding="10dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,65 +38,133 @@
             android:background="@null"
             android:gravity="top"
             android:hint="@string/editTxtContent"
+            android:inputType="textCapSentences"
             android:minHeight="48dp"
             android:padding="10dp"
-            android:inputType="textCapSentences"
             app:layout_constraintEnd_toEndOf="@+id/editTextTitle"
             app:layout_constraintStart_toStartOf="@+id/editTextTitle"
             app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
 
-        <ImageView
-            android:id="@+id/imgViewSpeechToTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"
-            android:contentDescription="@string/imgViewSpeechToText"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnUnderline"
-            app:layout_constraintTop_toBottomOf="@+id/editTextContent"
-            app:srcCompat="@android:drawable/ic_btn_speak_now" />
 
-        <Button
-            android:id="@+id/btnBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"
-            android:onClick="buttonBold"
-            android:text="@string/bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextContent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextContent">
 
-        <Button
-            android:id="@+id/btnItalics"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"
-            android:onClick="buttonItalics"
-            android:text="@string/italics"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnBold"
-            app:layout_constraintTop_toBottomOf="@+id/editTextContent" />
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btnUnderline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"
-            android:onClick="buttonUnderline"
-            android:text="@string/underline"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnItalics"
-            app:layout_constraintTop_toBottomOf="@+id/editTextContent" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/imgViewSpeechToTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/imgViewSpeechToText"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/btnUnderline"
+                        app:layout_constraintTop_toBottomOf="@+id/editTextContent"
+                        app:srcCompat="@android:drawable/ic_btn_speak_now" />
+
+                    <ImageButton
+                        android:id="@+id/btnBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
+                        android:onClick="buttonBold"
+                        app:srcCompat="@drawable/ic_baseline_format_bold_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/editTextContent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <ImageButton
+                        android:id="@+id/btnItalics"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
+                        android:onClick="buttonItalics"
+                        app:srcCompat="@drawable/ic_baseline_format_italic_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/btnBold"
+                        app:layout_constraintTop_toBottomOf="@+id/editTextContent" />
+
+                    <ImageButton
+                        android:id="@+id/btnUnderline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
+                        android:onClick="buttonUnderline"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/btnItalics"
+                        app:layout_constraintTop_toBottomOf="@+id/editTextContent"
+                        app:srcCompat="@drawable/ic_baseline_format_underlined_24" />
+
+                    <ImageButton
+                        android:id="@+id/btnLeft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
+                        android:onClick="buttonLeft"
+                        app:srcCompat="@drawable/ic_baseline_format_align_left_24" />
+
+                    <ImageButton
+                        android:id="@+id/btnCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
+                        android:onClick="buttonCenter"
+                        app:srcCompat="@drawable/ic_baseline_format_align_center_24" />
+
+
+                    <ImageButton
+                        android:id="@+id/btnRight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
+                        android:onClick="buttonRight"
+                        app:srcCompat="@drawable/ic_baseline_format_align_right_24" />
+
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
