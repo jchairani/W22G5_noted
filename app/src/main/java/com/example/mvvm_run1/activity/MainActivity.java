@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -73,6 +75,30 @@ public class MainActivity extends AppCompatActivity {
             intent1.putExtra("userid",userid);
             intent1.putExtra("hasNote",true);
             startActivity(intent1);
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                int item_pos = i;
+
+                new AlertDialog.Builder(MainActivity.this)
+                        .setIcon(android.R.drawable.ic_delete)
+                        .setTitle("Are you sure?")
+                        .setMessage("Do you want to delete this note?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                 noteViewModel.deleteNoteById(item_pos);
+                                 noteAdapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("No",null)
+                        .show();
+
+                return true;
+            }
         });
     }
 

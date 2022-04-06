@@ -11,7 +11,7 @@ import com.example.mvvm_run1.model.Note;
 
 import java.util.List;
 @Dao
-public interface NoteDAO {
+public interface        NoteDAO {
 
         @Insert
         void insertNote(Note note);
@@ -40,5 +40,7 @@ public interface NoteDAO {
         @Query("UPDATE note_table SET notetitle=:title , notecontent=:content WHERE noteid =:id")
         void updateNoteById(String title,String content,int id);
 
+        @Query("DELETE FROM note_table WHERE noteid = :noteid")
+        void deleteNoteById(int noteid);
 
 }
