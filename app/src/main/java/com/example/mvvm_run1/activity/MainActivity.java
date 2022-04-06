@@ -55,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
             Snackbar.make(findViewById(android.R.id.content), "Account information updated.", Snackbar.LENGTH_LONG).setAction("CLOSE", view12 -> {
             }).setActionTextColor(getResources().getColor(android.R.color.white)).show();
         }
+        if (snackbar == 3) {
+            Snackbar.make(findViewById(android.R.id.content), "No changes made on your information.", Snackbar.LENGTH_LONG).setAction("CLOSE", view12 -> {
+            }).setActionTextColor(getResources().getColor(android.R.color.white)).show();
+        }
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
         noteViewModel.getNoteById(userid).observe(this, notes -> {

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +22,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
 
 public class UpdateAccountActivity extends AppCompatActivity {
-    int userid;
+    int userid, position;
     Button btnUpdate;
     EditText etFirstName, etLastName, etUsername;
     UserViewModel userViewModel;
@@ -30,6 +31,8 @@ public class UpdateAccountActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_account);
 
@@ -38,18 +41,25 @@ public class UpdateAccountActivity extends AppCompatActivity {
         etLastName = findViewById(R.id.inputLastName);
         btnUpdate = findViewById(R.id.btnUpdate);
 
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userList = userViewModel.getAllUser();
 
         Intent getIntent = getIntent();
         userid = getIntent.getIntExtra("userid", 0);
 
-//        username = userViewModel.getUserById(userid).getUsername();
-//        firstname = userViewModel.getUserById(userid).getFirstname();
-//        lastname = userViewModel.getUserById(userid).getLastname();
+        try {
+            position = getIndex(userid);
 
-        userViewModel.getUsernameById(userid).observe(this, s -> etUsername.setText(s));
-        userViewModel.getFirstNameById(userid).observe(this, s -> etFirstName.setText(s));
-        userViewModel.getLastNameById(userid).observe(this, s -> etLastName.setText(s));
+        } catch (Exception exception){
+            exception.printStackTrace();
+        }
+
+        username = userList.get(position).getUsername();
+        firstname = userList.get(position).getFirstname();
+        lastname = userList.get(position).getLastname();
+
+        etUsername.setText(username);
+        etFirstName.setText(firstname);
+        etLastName.setText(lastname);
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,12 +71,19 @@ public class UpdateAccountActivity extends AppCompatActivity {
                     if (etFirstName.getText().toString().matches(".*\\d.*") || etLastName.getText().toString().matches(".*\\d.*")) {
                         Snackbar.make(findViewById(R.id.layout), "Name contains number!\nPlease input alphabetical values.", Snackbar.LENGTH_SHORT).show();
                     }
-                    for (int i = 0; i < userList.size(); i++) {
-                        if ((userViewModel.getUsernameById(i).equals(etUsername))) {
-                            Snackbar.make(findViewById(R.id.layout), "Username is taken.", Snackbar.LENGTH_SHORT).show();
-                            break;
-                        } else {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(UpdateAccountActivity.this);
+                    if (!(etUsername.getText().toString().equals(username)) && usernameCheck(etUsername.getText().toString()) == true) {
+                        Snackbar.make(findViewById(R.id.layout), "Username is taken.", Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateAccountActivity.this);
+
+                        if(etLastName.getText().toString().equals(lastname) && etFirstName.getText().toString().equals(firstname) && etUsername.getText().toString().equals(username)){
+                            Intent intent = new Intent(UpdateAccountActivity.this, MainActivity.class);
+                            intent.putExtra("userid", userid);
+                            intent.putExtra("snackbar", 3);
+                            startActivity(intent);
+                        }
+
+                        if (!(etUsername.getText().toString().equals(username))) {
                             builder.setMessage("Do you want to change your username to " + etUsername.getText().toString() + "?");
                             builder.setCancelable(true);
 
@@ -74,10 +91,11 @@ public class UpdateAccountActivity extends AppCompatActivity {
                                     "Yes",
                                     (dialog, id) -> {
                                         dialog.cancel();
-                                        Intent intent = new Intent(UpdateAccountActivity.this, MainActivity.class);
-                                        intent.putExtra("userid", userid);
-                                        intent.putExtra("snackbar", 2);
-                                        startActivity(intent);
+                                        userViewModel.changeUsername(userid, etUsername.getText().toString());
+//                                        Intent intent = new Intent(UpdateAccountActivity.this, MainActivity.class);
+//                                        intent.putExtra("userid", userid);
+//                                        intent.putExtra("snackbar", 2);
+//                                        startActivity(intent);
                                     });
 
                             builder.setNegativeButton(
@@ -87,11 +105,74 @@ public class UpdateAccountActivity extends AppCompatActivity {
                             AlertDialog alertDialog = builder.create();
                             alertDialog.show();
                         }
+
+                        if (!(etFirstName.getText().toString().equals(firstname))) {
+                            builder.setMessage("Do you want to change your first name to " + etFirstName.getText().toString() + "?");
+                            builder.setCancelable(true);
+
+                            builder.setPositiveButton(
+                                    "Yes",
+                                    (dialog, id) -> {
+                                        dialog.cancel();
+                                        userViewModel.changeFirstName(userid, etFirstName.getText().toString());
+                                    });
+
+                            builder.setNegativeButton(
+                                    "No",
+                                    (dialog, id) -> dialog.cancel());
+
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+                        }
+
+                        if (!(etLastName.getText().toString().equals(lastname))) {
+                            builder.setMessage("Do you want to change your first name to " + etLastName.getText().toString() + "?");
+                            builder.setCancelable(true);
+
+                            builder.setPositiveButton(
+                                    "Yes",
+                                    (dialog, id) -> {
+                                        dialog.cancel();
+                                        userViewModel.changeFirstName(userid, etLastName.getText().toString());
+                                    });
+
+                            builder.setNegativeButton(
+                                    "No",
+                                    (dialog, id) -> dialog.cancel());
+
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+                        }
+
+                        Intent intent = new Intent(UpdateAccountActivity.this, MainActivity.class);
+                        intent.putExtra("userid", userid);
+                        intent.putExtra("snackbar", 2);
+                        startActivity(intent);
+
                     }
+
                 }
             }
         });
 
+    }
+
+    public int getIndex(int userid) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getUserid() == userid) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public boolean usernameCheck(String username) {
+        for (int i = 0; i < userList.size(); i++) {
+            if ((userList.get(i).getUsername().equals(username))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

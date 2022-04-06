@@ -38,8 +38,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     private static ResetPasswordActivity instance;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
@@ -72,10 +70,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
             resetButton.setText("Change password");
 
-            username = userList.get(userid-1).getUsername();
-            firstname = userList.get(userid-1).getFirstname();
-            lastname = userList.get(userid-1).getLastname();
-            Log.d("josjos",username);
+            username = userList.get(userid - 1).getUsername();
+            firstname = userList.get(userid - 1).getFirstname();
+            lastname = userList.get(userid - 1).getLastname();
+            Log.d("josjos", username);
 
 //            userViewModel.getUsernameById(userid).observe(this, s -> username = s);
 //            userViewModel.getFirstNameById(userid).observe(this, s -> firstname = s);
@@ -85,14 +83,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
         resetButton.setOnClickListener(view -> {
             input = editText.getText().toString();
 
-            if (userList.isEmpty()) {
-                Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();;
+            if (userList.size() == 0) {
+                Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
             }
             if (input.equals("")) {
                 Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
             } else {
                 if (userid > 0) {
-                    Log.d("josjos",""+userid);
+                    Log.d("josjos", "" + userid);
                     newpass = editText.getText().toString();
                     matchpass = editText2.getText().toString();
 
@@ -109,7 +107,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                 } else {
                                     if (newpass.length() > 7) {
                                         //HERE--------------
-                                        userViewModel.changePassword(userid,newpass);
+                                        userViewModel.changePassword(userid, newpass);
 
                                         Intent intent = new Intent(ResetPasswordActivity.this, MainActivity.class);
                                         intent.putExtra("userid", userid);
@@ -125,6 +123,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
                     }
                 } else {
+                    if (usernameCheck(input)==false) {
+                        Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
+                    }
                     for (int i = 0; i < userList.size(); i++) {
                         if (userList.get(i).getUsername().equals(input)) {
                             username = input;
@@ -185,12 +186,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                                                     Snackbar.make(findViewById(R.id.layout), "Password does not match.", Snackbar.LENGTH_SHORT).show();
                                                                 } else {
                                                                     if (newpass.length() > 7) {
+                                                                        userid = userList.get(finalI).getUserid();
 
-                                                                        for(int x=0;x<userList.size();x++){
-                                                                            if(userList.get(x).getUsername().equals(username)){
-                                                                                userViewModel.changePassword(userid+1,newpass);
-                                                                            }
-                                                                        }
+                                                                        userViewModel.changePassword(userid, newpass);
+
                                                                         Intent intent2 = new Intent(ResetPasswordActivity.this, loginActivity.class);
                                                                         intent2.putExtra("snackbar", 1);
                                                                         startActivity(intent2);
@@ -212,9 +211,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-
-                        } else {
-                            Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -222,10 +218,19 @@ public class ResetPasswordActivity extends AppCompatActivity {
         });
     }
 
+    public boolean usernameCheck(String username) {
+        for (int i = 0; i < userList.size(); i++) {
+            if ((userList.get(i).getUsername().equals(username))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(fromLogin == 1){
+        if (fromLogin == 1) {
             Intent intent = new Intent(ResetPasswordActivity.this, loginActivity.class);
             startActivity(intent);
         }

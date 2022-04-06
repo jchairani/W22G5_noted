@@ -19,35 +19,36 @@ public class UserRepository {
     private UserDAO dao;
     private List<User> users;
 
-    public UserRepository(Application application){
+    public UserRepository(Application application) {
         db = NoteDatabase.getInstance(application);
         dao = db.userDAO();
         ExecutorService executors = Executors.newSingleThreadExecutor();
         executors.execute(() -> users = dao.getAllUser());
     }
-    public void insertUser(User user){
+
+    public void insertUser(User user) {
         ExecutorService executors = Executors.newSingleThreadExecutor();
         executors.execute(() -> dao.insertUser(user));
     }
 
-    public void updateUser(User user){
+    public void updateUser(User user) {
         ExecutorService executors = Executors.newSingleThreadExecutor();
         executors.execute(() -> dao.updateUser(user));
     }
 
-    public List<User> getAllUser(){
+    public List<User> getAllUser() {
         return users;
     }
 
-    public LiveData<String> getUsernameById(int userid){
+    public LiveData<String> getUsernameById(int userid) {
         return dao.getUsernameById(userid);
     }
 
-    public LiveData<String> getFirstNameById(int userid){
+    public LiveData<String> getFirstNameById(int userid) {
         return dao.getFirstNameById(userid);
     }
 
-    public LiveData<String> getLastNameById(int userid){
+    public LiveData<String> getLastNameById(int userid) {
         return dao.getLastNameById(userid);
     }
 
@@ -55,16 +56,30 @@ public class UserRepository {
         return dao.getUsernameByString(user);
     }
 
-    public void changePassword(int id,String pass){
+    public void changePassword(int id, String pass) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                dao.changePassword(id,pass);
+                dao.changePassword(id, pass);
             }
         });
     }
 
+    public void changeUsername(int id, String user) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> dao.changeUsername(id, user));
+    }
+
+    public void changeLastName(int id, String lname) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> dao.changeLastName(id, lname));
+    }
+
+    public void changeFirstName(int id, String fname) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> dao.changeFirstName(id, fname));
+    }
 
 
 }

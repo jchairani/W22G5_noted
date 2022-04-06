@@ -50,7 +50,7 @@ public class SignupActivity extends AppCompatActivity {
             if (user.equals("") || pass.equals("") || repass.equals("")) {
                 Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
             } else {
-                if (usernameCheck(user)==true && !(userList.isEmpty())) {
+                if (usernameCheck(user)==true) {
                     Snackbar.make(findViewById(R.id.layout), "Username is taken.", Snackbar.LENGTH_SHORT).show();
                 }
                 else if (pass.length() > 7) {
@@ -82,11 +82,11 @@ public class SignupActivity extends AppCompatActivity {
 
     public boolean usernameCheck(String username) {
         for (int i = 0; i < userList.size(); i++) {
-            if (!(userList.get(i).getUsername().equals(username))) {
-                return false;
+            if ((userList.get(i).getUsername().equals(username))) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override

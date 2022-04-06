@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.room.Query;
 
 import com.example.mvvm_run1.model.User;
 import com.example.mvvm_run1.repository.UserRepository;
@@ -49,6 +50,18 @@ public class UserViewModel extends AndroidViewModel {
     }
     public void changePassword(int id,String pass){
         repository.changePassword(id,pass);
+    }
+
+    public void changeUsername(int id,String user){
+        repository.changePassword(id,user);
+    }
+
+    public void changeLastName(int id,String lname){
+        repository.changePassword(id,lname);
+    }
+
+    public  void changeFirstName(int id,String fname){
+        repository.changePassword(id,fname);
     }
 
 }
