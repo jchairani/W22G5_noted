@@ -1,5 +1,7 @@
 package com.example.mvvm_run1.activity;
 
+import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -98,29 +100,67 @@ public class noteAcitivity extends AppCompatActivity {
 
     }
 
-    public void buttonCenter(View view) {
-
-    }
-
-    public void buttonLeft(View view) {
-
-    }
-
-    public void buttonRight(View view) {
-
-    }
-
     public void buttonBold(View view) {
+//        Spannable spannableString = etContent.getText();
+//        StyleSpan[] spans = spannableString.getSpans(etContent.getSelectionStart(), etContent.getSelectionEnd(), StyleSpan.class);
+//        if (spans.length == 0) {
+//            spannableString.setSpan(new StyleSpan(Typeface.BOLD), etContent.getSelectionStart(), etContent.getSelectionEnd(), SPAN_EXCLUSIVE_EXCLUSIVE);
+//        } else {
+//            for (StyleSpan span : spans) {
+//                spannableString.removeSpan(span);
+//            }
+//        }
+
+        Spannable spannableString = new SpannableStringBuilder(etContent.getText());
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), etContent.getSelectionStart(), etContent.getSelectionEnd(), 0);
+        etContent.setText(spannableString);
 
     }
+
 
     public void buttonItalics(View view) {
+        Spannable spannableString = new SpannableStringBuilder(etContent.getText());
+        spannableString.setSpan(new StyleSpan(Typeface.ITALIC), etContent.getSelectionStart(), etContent.getSelectionEnd(), 0);
+        etContent.setText(spannableString);
 
-
+//        Spannable spannableString = etContent.getText();
+//        StyleSpan[] spans = spannableString.getSpans(etContent.getSelectionStart(), etContent.getSelectionEnd(), StyleSpan.class);
+//        if (spans.length == 0) {
+//            spannableString.setSpan(new StyleSpan(Typeface.ITALIC), etContent.getSelectionStart(), etContent.getSelectionEnd(), SPAN_EXCLUSIVE_EXCLUSIVE);
+//        } else {
+//            for (StyleSpan span : spans) {
+//                spannableString.removeSpan(span);
+//            }
+//        }
     }
 
     public void buttonUnderline(View view) {
+        Spannable spannableString = new SpannableStringBuilder(etContent.getText());
+        spannableString.setSpan(new UnderlineSpan(), etContent.getSelectionStart(), etContent.getSelectionEnd(), 0);
+        etContent.setText(spannableString);
+    }
 
+    public void buttonResetFormat(View view) {
+        String stringText = etContent.getText().toString();
+        etContent.setText(stringText);
+    }
+
+    public void buttonLeft(View view) {
+        etContent.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+        Spannable spannableString = new SpannableStringBuilder(etContent.getText());
+        etContent.setText(spannableString);
+    }
+
+    public void buttonCenter(View view) {
+        etContent.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        Spannable spannableString = new SpannableStringBuilder(etContent.getText());
+        etContent.setText(spannableString);
+    }
+
+    public void buttonRight(View view) {
+        etContent.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+        Spannable spannableString = new SpannableStringBuilder(etContent.getText());
+        etContent.setText(spannableString);
     }
 
     @Override
@@ -146,7 +186,6 @@ public class noteAcitivity extends AppCompatActivity {
                 i.putExtra("userid", userid);
                 noteViewModel.insertNote(temp);
                 startActivity(i);
-
             }
         }
         super.onBackPressed();

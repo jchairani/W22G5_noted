@@ -38,7 +38,7 @@
             android:background="@null"
             android:gravity="top"
             android:hint="@string/editTxtContent"
-            android:inputType="textCapSentences"
+            android:inputType="textMultiLine"
             android:minHeight="48dp"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="@+id/editTextTitle"
@@ -86,12 +86,13 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp"
                         android:layout_weight="1"
+                        android:minHeight="48dp"
                         android:onClick="buttonBold"
-                        app:srcCompat="@drawable/ic_baseline_format_bold_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/editTextContent"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.0"
+                        app:srcCompat="@drawable/ic_baseline_format_bold_24" />
 
                     <ImageButton
                         android:id="@+id/btnItalics"
@@ -102,11 +103,12 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp"
                         android:layout_weight="1"
+                        android:minHeight="48dp"
                         android:onClick="buttonItalics"
-                        app:srcCompat="@drawable/ic_baseline_format_italic_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/btnBold"
-                        app:layout_constraintTop_toBottomOf="@+id/editTextContent" />
+                        app:layout_constraintTop_toBottomOf="@+id/editTextContent"
+                        app:srcCompat="@drawable/ic_baseline_format_italic_24" />
 
                     <ImageButton
                         android:id="@+id/btnUnderline"
@@ -117,11 +119,25 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp"
                         android:layout_weight="1"
+                        android:minHeight="48dp"
                         android:onClick="buttonUnderline"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/btnItalics"
                         app:layout_constraintTop_toBottomOf="@+id/editTextContent"
                         app:srcCompat="@drawable/ic_baseline_format_underlined_24" />
+
+                    <ImageButton
+                        android:id="@+id/btnResetFormat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
+                        android:minHeight="48dp"
+                        android:onClick="buttonResetFormat"
+                        app:srcCompat="@drawable/ic_baseline_format_clear_24" />
 
                     <ImageButton
                         android:id="@+id/btnLeft"
@@ -132,6 +148,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp"
                         android:layout_weight="1"
+                        android:minHeight="48dp"
                         android:onClick="buttonLeft"
                         app:srcCompat="@drawable/ic_baseline_format_align_left_24" />
 
@@ -144,6 +161,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp"
                         android:layout_weight="1"
+                        android:minHeight="48dp"
                         android:onClick="buttonCenter"
                         app:srcCompat="@drawable/ic_baseline_format_align_center_24" />
 
@@ -155,6 +173,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_marginBottom="16dp"
                         android:layout_weight="1"
                         android:onClick="buttonRight"
