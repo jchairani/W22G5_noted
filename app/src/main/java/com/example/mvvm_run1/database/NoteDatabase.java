@@ -12,7 +12,7 @@ import com.example.mvvm_run1.dao.UserDAO;
 import com.example.mvvm_run1.model.Note;
 import com.example.mvvm_run1.model.User;
 
-@Database(entities={Note.class, User.class},version = 1)
+@Database(entities={Note.class, User.class},version = 2)
 public abstract class NoteDatabase extends RoomDatabase {
     public static NoteDatabase instance;
     public abstract NoteDAO noteDAO();
@@ -23,6 +23,7 @@ public abstract class NoteDatabase extends RoomDatabase {
             instance = Room.databaseBuilder(context.getApplicationContext(),NoteDatabase.class,
                     "NoteDatabase")
                     .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build();
         }
         return instance;

@@ -16,14 +16,28 @@ public class Note {
 
     String notetitle;
 
+    String imagePath;
+
     String notecontent;
 
     int usercreatorid;
 
-    public Note(String notetitle, String notecontent,int usercreatorid) {
+    public Note(String notetitle, String notecontent, int usercreatorid) {
         this.notetitle = notetitle;
         this.notecontent = notecontent;
         this.usercreatorid = usercreatorid;
+//        this.imagePath = imagePath;
+    }
+
+    public Note() {
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public int getUsercreatorid() {

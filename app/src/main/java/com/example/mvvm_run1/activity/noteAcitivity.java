@@ -2,14 +2,26 @@ package com.example.mvvm_run1.activity;
 
 import static java.lang.String.format;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.renderscript.ScriptGroup;
 import android.speech.RecognizerIntent;
 import android.text.Html;
 import android.text.Spannable;
@@ -21,23 +33,30 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.mvvm_run1.R;
 import com.example.mvvm_run1.model.Note;
 import com.example.mvvm_run1.viewmodel.NoteViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 
 public class noteAcitivity extends AppCompatActivity {
     NoteViewModel noteViewModel;
     EditText etTitle, etContent;
-    ImageButton spchToText, btnBold, btnItalics, btnUnderline, btnCenter, btnLeft, btnRight;
+    ImageButton spchToText, btnBold, btnItalics, btnUnderline, btnCenter, btnLeft, btnRight, btnImage;
     List<Note> notes;
-    String storedContent;
-    int userid, noteId, position = 0;
+    String storedContent, selectedImagePath;
+    ImageView imageView;
+    int userid, noteId, position;
     boolean hasNote;
+
+    static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
+    static final int REQUEST_CODE_SELECT_IMAGE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +81,18 @@ public class noteAcitivity extends AppCompatActivity {
         btnCenter = findViewById(R.id.btnCenter);
         btnRight = findViewById(R.id.btnRight);
         btnLeft = findViewById(R.id.btnLeft);
+        btnImage = findViewById(R.id.btnImage);
+        imageView = findViewById(R.id.imageNote);
 
         notes = noteViewModel.getAllNoteById(userid);
 
-
+        selectedImagePath = "";
+        position = 0;
 
         if (hasNote) {
             noteId = notes.get(position).getNoteid();
             etTitle.setText(notes.get(position).getNotetitle());
+//            selectedImagePath = notes.get(position).getImagePath();
             etContent.setText(notes.get(position).getNotecontent());
             storedContent = etContent.getText().toString();
             etContent.setText(Html.fromHtml(storedContent));
@@ -77,6 +100,14 @@ public class noteAcitivity extends AppCompatActivity {
             etTitle.setText("");
             etContent.setText("");
         }
+
+        btnImage.setOnClickListener(view -> {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(noteAcitivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
+            } else {
+                addImage();
+            }
+        });
 
         spchToText.setOnClickListener(view -> {
             Intent intent1 = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -91,6 +122,13 @@ public class noteAcitivity extends AppCompatActivity {
                 ex.printStackTrace();
             }
         });
+    }
+
+    public void addImage() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, REQUEST_CODE_SELECT_IMAGE);
+        }
     }
 
     public void buttonBold(View view) {
@@ -155,6 +193,18 @@ public class noteAcitivity extends AppCompatActivity {
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_STORAGE_PERMISSION && grantResults.length > 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                addImage();
+            } else {
+                Snackbar.make(findViewById(R.id.constraintLayout), "Permission denied.", Snackbar.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         String title = etTitle.getText().toString();
         String content = Html.toHtml(etContent.getText());
@@ -189,6 +239,38 @@ public class noteAcitivity extends AppCompatActivity {
         if (requestCode == 10) {
             etContent.setText(data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0));
         }
+        if (requestCode == REQUEST_CODE_SELECT_IMAGE && resultCode == RESULT_OK) {
+            if (data != null) {
+                Uri selectedImage = data.getData();
+                if (selectedImage != null) {
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(selectedImage);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        imageView.setImageBitmap(bitmap);
+                        imageView.setVisibility(View.VISIBLE);
+
+                        selectedImagePath = getPathFromUri(selectedImage);
+
+                    } catch (Exception exception) {
+                        Snackbar.make(findViewById(R.id.constraintLayout), exception.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }
+    }
+
+    private String getPathFromUri(Uri uri) {
+        String filePath;
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+
+        if (cursor == null) {
+            filePath = uri.getPath();
+        } else {
+            cursor.moveToFirst();
+            int i = cursor.getColumnIndex("data");
+            filePath = cursor.getString(i);
+        }
+        return filePath;
     }
 
 }
