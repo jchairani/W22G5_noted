@@ -5,6 +5,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
     tools:context=".activity.loginActivity">
 
@@ -43,6 +44,7 @@
                 android:fontFamily="@font/sfuidisplay_light"
                 android:hint="Username"
                 android:inputType="textPersonName"
+                android:textColor="#DDDDDD"
                 android:minHeight="48dp"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -62,6 +64,7 @@
                 android:fontFamily="@font/sfuidisplay_light"
                 android:hint="Password"
                 android:inputType="textPassword"
+                android:textColor="#DDDDDD"
                 android:minHeight="48dp"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -71,6 +74,8 @@
             android:id="@+id/cbSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#DDDDDD"
+
             android:fontFamily="@font/sfuidisplay_regular"
             android:minHeight="48dp"
             android:text="Keep me signed in." />
@@ -89,14 +94,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sfuidisplay_light"
-            android:text="\nDon't have an account?" />
+            android:text="\nDon't have an account?"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/txtViewSignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sfuidisplay_light"
-
+            android:textColor="#FFFFFF"
             android:text="@string/registerHere"
             android:textAlignment="center" />
 
@@ -104,6 +110,7 @@
             android:id="@+id/txtForgotPass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/sfuidisplay_light"
 
@@ -113,6 +120,8 @@
             android:id="@+id/txtForgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+
             android:layout_marginBottom="32dp"
 
             android:fontFamily="@font/sfuidisplay_light"
