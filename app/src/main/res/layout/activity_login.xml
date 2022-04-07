@@ -15,6 +15,19 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/txtViewWelcome"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/sfuidisplay_medium"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:padding="16dp"
+            android:text="Welcome"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
         <EditText
             android:id="@+id/etUsername"
             android:layout_marginTop="32dp"
