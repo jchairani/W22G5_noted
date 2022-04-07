@@ -25,31 +25,43 @@ public class NoteViewModel extends AndroidViewModel {
 
     }
 
-    public void insertNote(Note note){
+    public void insertNote(Note note) {
         repository.insertNote(note);
     }
-    public void updateNote(Note note){
+
+    public void updateNote(Note note) {
         repository.updateNote(note);
     }
-    public LiveData<List<Note>> getNoteById(int id){
+
+    public LiveData<List<Note>> getNoteById(int id) {
         return repository.getNotesById(id);
     }
-    public LiveData<List<Note>> getAllNotes(){
+
+    public LiveData<List<Note>> getAllNotes() {
         return mnotes;
     }
-    public List<Note> getAllNoteById(int usercreatorid){
+
+    public List<Note> getAllNoteById(int usercreatorid) {
         return repository.getAllNoteById(usercreatorid);
     }
-    public LiveData<String> getNoteTitleByNoteId(int id) {return repository.getNoteTitleByNoteId(id); }
-    public LiveData<String> getNoteContentByNoteId(int id) {return repository.getNoteContentByNoteId(id); }
 
-    public void updateNoteById(String title, String content, int id){
-        repository.updateNoteById(title,content,id);
+    public LiveData<String> getNoteTitleByNoteId(int id) {
+        return repository.getNoteTitleByNoteId(id);
     }
 
-    public void deleteNoteById(int id){ repository.deleteNoteById(id);}
+    public LiveData<String> getNoteContentByNoteId(int id) {
+        return repository.getNoteContentByNoteId(id);
+    }
 
-    public List<Note> findAllNotes(){
+    public void updateNoteById(String title, String content, String alignment, int id) {
+        repository.updateNoteById(title, content, alignment, id);
+    }
+
+    public void deleteNoteById(int id) {
+        repository.deleteNoteById(id);
+    }
+
+    public List<Note> findAllNotes() {
         return repository.findAllNotes();
     }
 }

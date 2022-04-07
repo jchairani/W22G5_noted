@@ -42,8 +42,8 @@ public interface NoteDAO {
     @Query("SELECT notecontent FROM note_table WHERE noteid =:noteid")
     LiveData<String> getNoteContentByNoteId(int noteid);
 
-    @Query("UPDATE note_table SET notetitle=:title , notecontent=:content WHERE noteid =:id")
-    void updateNoteById(String title, String content, int id);
+    @Query("UPDATE note_table SET notetitle=:title , notecontent=:content, alignment=:alignment WHERE noteid =:id")
+    void updateNoteById(String title, String content, String alignment, int id);
 
     @Query("DELETE FROM note_table WHERE noteid = :noteid")
     void deleteNoteById(int noteid);

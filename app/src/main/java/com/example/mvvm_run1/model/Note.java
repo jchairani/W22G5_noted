@@ -6,30 +6,41 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "note_table",
         foreignKeys = {@ForeignKey(entity = User.class,
-        parentColumns = "userid",
-        childColumns = "usercreatorid",
-        onDelete = ForeignKey.CASCADE)
-})
+                parentColumns = "userid",
+                childColumns = "usercreatorid",
+                onDelete = ForeignKey.CASCADE)
+        })
 public class Note {
     @PrimaryKey(autoGenerate = true)
     int noteid;
 
     String notetitle;
 
-    String imagePath;
-
     String notecontent;
+
+    String alignment;
 
     int usercreatorid;
 
-    public Note(String notetitle, String notecontent, int usercreatorid) {
+    String imagePath;
+
+    public Note(String notetitle, String notecontent, String alignment, int usercreatorid) {
         this.notetitle = notetitle;
         this.notecontent = notecontent;
+        this.alignment = alignment;
         this.usercreatorid = usercreatorid;
 //        this.imagePath = imagePath;
     }
 
     public Note() {
+    }
+
+    public String getAlignment() {
+        return alignment;
+    }
+
+    public void setAlignment(String alignment) {
+        this.alignment = alignment;
     }
 
     public String getImagePath() {

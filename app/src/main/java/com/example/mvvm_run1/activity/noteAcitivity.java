@@ -50,9 +50,9 @@ public class noteAcitivity extends AppCompatActivity {
     EditText etTitle, etContent;
     ImageButton spchToText, btnBold, btnItalics, btnUnderline, btnCenter, btnLeft, btnRight, btnImage;
     List<Note> notes;
-    String storedContent, selectedImagePath;
+    String storedContent, selectedImagePath, alignment, storedTitle, content, title, storedAlignment;
     ImageView imageView;
-    int userid, noteId, position;
+    int userid, noteId, position = 0;
     boolean hasNote;
 
     static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
@@ -86,16 +86,39 @@ public class noteAcitivity extends AppCompatActivity {
 
         notes = noteViewModel.getAllNoteById(userid);
 
-        selectedImagePath = "";
-        position = 0;
+        alignment = "View.TEXT_ALIGNMENT_TEXT_START";
+        //selectedImagePath = "";
 
         if (hasNote) {
             noteId = notes.get(position).getNoteid();
+
             etTitle.setText(notes.get(position).getNotetitle());
-//            selectedImagePath = notes.get(position).getImagePath();
+            storedTitle = etTitle.getText().toString();
+
             etContent.setText(notes.get(position).getNotecontent());
             storedContent = etContent.getText().toString();
             etContent.setText(Html.fromHtml(storedContent));
+
+            storedAlignment = notes.get(position).getAlignment();
+            Spannable spannableString = new SpannableStringBuilder(etContent.getText());
+
+            if (storedAlignment.equals("View.TEXT_ALIGNMENT_CENTER")) {
+                etContent.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                etContent.setText(spannableString);
+                alignment = "View.TEXT_ALIGNMENT_CENTER";
+
+            } else if (storedAlignment.equals("View.TEXT_ALIGNMENT_TEXT_END")) {
+                etContent.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+                etContent.setText(spannableString);
+                alignment = "View.TEXT_ALIGNMENT_TEXT_END";
+
+            } else {
+                etContent.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+                etContent.setText(spannableString);
+                alignment = "View.TEXT_ALIGNMENT_TEXT_START";
+            }
+
+            //selectedImagePath = notes.get(position).getImagePath();
         } else {
             etTitle.setText("");
             etContent.setText("");
@@ -178,18 +201,21 @@ public class noteAcitivity extends AppCompatActivity {
         Spannable spannableString = new SpannableStringBuilder(etContent.getText());
         etContent.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         etContent.setText(spannableString);
+        alignment = "View.TEXT_ALIGNMENT_TEXT_START";
     }
 
     public void buttonCenter(View view) {
         Spannable spannableString = new SpannableStringBuilder(etContent.getText());
         etContent.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         etContent.setText(spannableString);
+        alignment = "View.TEXT_ALIGNMENT_CENTER";
     }
 
     public void buttonRight(View view) {
         Spannable spannableString = new SpannableStringBuilder(etContent.getText());
         etContent.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
         etContent.setText(spannableString);
+        alignment = "View.TEXT_ALIGNMENT_TEXT_END";
     }
 
     @Override
@@ -206,16 +232,19 @@ public class noteAcitivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        String title = etTitle.getText().toString();
-        String content = Html.toHtml(etContent.getText());
-
-        Note temp = new Note(title, content, userid);
+        title = etTitle.getText().toString();
+        content = Html.toHtml(etContent.getText());
 
         Log.d("josjos", "" + hasNote);
 
         if (hasNote) {
-            if (!(title.equals("") && content.equals(""))) {
-                noteViewModel.insertNote(new Note(title, content, userid));
+            if (title.equals(storedTitle) && content.equals(storedContent)  && alignment.equals(storedAlignment)) {
+                Intent i = new Intent(noteAcitivity.this, MainActivity.class);
+                i.putExtra("userid", userid);
+                startActivity(i);
+            } else {
+                //noteViewModel.updateNoteById(title, content, alignment, noteId);
+                noteViewModel.insertNote(new Note(title, content, alignment, userid));
                 noteViewModel.deleteNoteById(noteId);
                 Intent i = new Intent(noteAcitivity.this, MainActivity.class);
                 i.putExtra("userid", userid);
@@ -223,10 +252,9 @@ public class noteAcitivity extends AppCompatActivity {
             }
         } else {
             if (!(title.equals("") && content.equals(""))) {
-
                 Intent i = new Intent(noteAcitivity.this, MainActivity.class);
                 i.putExtra("userid", userid);
-                noteViewModel.insertNote(temp);
+                noteViewModel.insertNote(new Note(title, content, alignment, userid));
                 startActivity(i);
             }
         }

@@ -36,7 +36,7 @@ public class NoteRepository {
 
     }
 
-    public void updateNote(Note note){
+    public void updateNote(Note note) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(new Runnable() {
             @Override
@@ -54,7 +54,7 @@ public class NoteRepository {
         return mnotes;
     }
 
-    public List<Note> getAllNoteById(int usercreatorid){
+    public List<Note> getAllNoteById(int usercreatorid) {
         return dao.getAllNotesById(usercreatorid);
     }
 
@@ -66,18 +66,18 @@ public class NoteRepository {
         return dao.getNoteContentByNoteId(id);
     }
 
-    public void updateNoteById(String title, String content, int id){
+    public void updateNoteById(String title, String content, String alignment, int id) {
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                dao.updateNoteById(title,content,id);
+                dao.updateNoteById(title, content, alignment, id);
             }
         });
     }
 
-    public void deleteNoteById(int id){
+    public void deleteNoteById(int id) {
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(new Runnable() {
@@ -88,7 +88,7 @@ public class NoteRepository {
         });
     }
 
-    public List<Note> findAllNotes(){
+    public List<Note> findAllNotes() {
         return dao.findAllNotes();
     }
 
