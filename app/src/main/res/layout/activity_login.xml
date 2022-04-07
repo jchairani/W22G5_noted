@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Username"
+            android:fontFamily="@font/sfuidisplay_light"
             android:inputType="textPersonName"
             android:minHeight="48dp" />
 
@@ -31,6 +32,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Password"
+            android:fontFamily="@font/sfuidisplay_light"
             android:inputType="textPassword"
             android:minHeight="48dp" />
 
@@ -39,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
+            android:fontFamily="@font/sfuidisplay_regular"
             android:text="Keep me signed in." />
 
         <Button
@@ -47,18 +50,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/sfuidisplay_semibold"
             android:text="login" />
 
         <TextView
             android:id="@+id/txtViewCreateAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/sfuidisplay_light"
             android:text="\nDon't have an account?" />
 
         <TextView
             android:id="@+id/txtViewSignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/sfuidisplay_light"
+
             android:text="@string/registerHere"
             android:textAlignment="center" />
 
@@ -67,12 +74,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/sfuidisplay_light"
+
             android:text="\nForgot password?" />
 
         <TextView
             android:id="@+id/txtForgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/sfuidisplay_light"
+
             android:text="@string/resetHere"
             android:textAlignment="center"
             android:layout_marginBottom="32dp"/>

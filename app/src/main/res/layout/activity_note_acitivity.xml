@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:gravity="top"
+        android:background="#F6F6F6"
         android:orientation="vertical">
 
         <LinearLayout
@@ -25,14 +26,16 @@
             <EditText
                 android:id="@+id/editTextTitle"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sfuidisplay_bold"
+                android:textSize="24dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/editTxtTitle"
                 android:inputType="textCapWords"
                 android:padding="10dp"
-                android:textStyle="bold" />
+                 />
 
 
             <LinearLayout
@@ -51,6 +54,7 @@
                     android:layout_marginTop="6dp"
                     android:layout_marginEnd="16dp"
                     android:background="@null"
+                    android:fontFamily="@font/sfuidisplay_regular"
                     android:gravity="top"
                     android:hint="@string/editTxtContent"
                     android:inputType="textMultiLine"
@@ -58,7 +62,7 @@
                     android:paddingStart="10dp"
                     android:paddingTop="10dp"
                     android:paddingEnd="10dp"
-                    android:paddingBottom="80dp" />
+                    android:paddingBottom="16dp" />
 
             </LinearLayout>
 
@@ -69,6 +73,7 @@
         android:id="@+id/horizontalScrollView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#202020"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -84,14 +89,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:minHeight="48dp"
                 android:contentDescription="@string/imgViewSpeechToText"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btnUnderline"
                 app:layout_constraintTop_toBottomOf="@+id/editTextContent"
-                app:srcCompat="@android:drawable/ic_btn_speak_now" />
+                app:srcCompat="@drawable/ic_baseline_mic_24" />
 
             <ImageButton
                 android:id="@+id/btnBold"
@@ -99,9 +104,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
                 android:minHeight="48dp"
                 android:onClick="buttonBold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -117,9 +121,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
                 android:minHeight="48dp"
                 android:onClick="buttonItalics"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -134,9 +137,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
                 android:minHeight="48dp"
                 android:onClick="buttonUnderline"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -151,9 +153,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
                 android:minHeight="48dp"
                 android:onClick="buttonResetFormat"
                 app:srcCompat="@drawable/ic_baseline_format_clear_24"
@@ -165,9 +166,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
                 android:minHeight="48dp"
                 android:onClick="buttonLeft"
                 app:srcCompat="@drawable/ic_baseline_format_align_left_24"
@@ -179,9 +179,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
                 android:minHeight="48dp"
                 android:onClick="buttonCenter"
                 app:srcCompat="@drawable/ic_baseline_format_align_center_24"
@@ -194,10 +193,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
                 android:onClick="buttonRight"
                 app:srcCompat="@drawable/ic_baseline_format_align_right_24" />
 
