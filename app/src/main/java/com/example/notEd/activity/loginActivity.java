@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,9 +25,9 @@ public class loginActivity extends AppCompatActivity {
     Button login;
     TextView signup, reset;
     CheckBox checkBox;
-    boolean isChecked;
     String username, password;
     List<User> userList;
+    SharedPreferences sharedpreferences;
     int snackbar;
 
     @Override
@@ -37,7 +38,6 @@ public class loginActivity extends AppCompatActivity {
         if (finish) {
             startActivity(new Intent(getApplicationContext(), loginActivity.class));
             finish();
-            return;
         }
 
         setContentView(R.layout.activity_login);
@@ -48,13 +48,21 @@ public class loginActivity extends AppCompatActivity {
         signup = findViewById(R.id.txtViewSignup);
         reset = findViewById(R.id.txtForgotPassword);
         checkBox = findViewById(R.id.cbSignIn);
-        isChecked = false;
+
+        sharedpreferences = getApplicationContext().getSharedPreferences("Preferences", 0);
+        String keepSigned = sharedpreferences.getString("LOGIN", null);
+        int keepID = sharedpreferences.getInt("ID", 0);
+
+        if (keepSigned != null) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("userid", keepID);
+            startActivity(intent);
+        }
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         Intent getIntent = getIntent();
         snackbar = getIntent.getIntExtra("snackbar", 0);
-        isChecked = getIntent.getBooleanExtra("isChecked", false);
 
         if (snackbar == 1) {
             Snackbar.make(findViewById(android.R.id.content), "Password changed.\nPlease log in to continue.", Snackbar.LENGTH_LONG).setAction("CLOSE", view12 -> {
@@ -63,9 +71,8 @@ public class loginActivity extends AppCompatActivity {
 
         //store the state of checkbox in shared preferences
         checkBox.setOnCheckedChangeListener((compoundButton, b) -> {
-            SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("isChecked", b);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString("LOGIN", "keepSigned");
             editor.commit();
         });
 
@@ -80,38 +87,38 @@ public class loginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        if (isChecked == true) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-        } else {
-            login.setOnClickListener(view -> {
+        login.setOnClickListener(view -> {
 
-                userList = userViewModel.getAllUser();
-                username = etUsername.getText().toString();
-                password = etPassword.getText().toString();
+            userList = userViewModel.getAllUser();
+            username = etUsername.getText().toString();
+            password = etPassword.getText().toString();
 
-                if (username.equals("") || password.equals("")) {
-                    Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
+            if (username.equals("") || password.equals("")) {
+                Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
+            } else {
+                if (userList.isEmpty()) {
+                    Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
+                    ;
                 } else {
-                    if (userList.isEmpty()) {
-                        Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
-                        ;
-                    } else {
-                        for (int i = 0; i < userList.size(); i++) {
-                            if (userList.get(i).getUsername().equals(username) && userList.get(i).getUserpass().equals(password)) {
-                                Intent intent = new Intent(loginActivity.this, MainActivity.class);
-                                intent.putExtra("userid", userList.get(i).getUserid());
-                                startActivity(intent);
-                            } else if (userList.get(i).getUsername().equals(username) && !(userList.get(i).getUserpass().equals(password))) {
-                                Snackbar.make(findViewById(R.id.layout), "Wrong password.", Snackbar.LENGTH_SHORT).show();
-                            } else if (usernameCheck(username) == false) {
-                                Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
-                            }
+                    for (int i = 0; i < userList.size(); i++) {
+                        if (userList.get(i).getUsername().equals(username) && userList.get(i).getUserpass().equals(password)) {
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            editor.putInt("ID", userList.get(i).getUserid());
+                            editor.commit();
+
+                            Intent intent = new Intent(loginActivity.this, MainActivity.class);
+                            intent.putExtra("userid", userList.get(i).getUserid());
+                            startActivity(intent);
+                        } else if (userList.get(i).getUsername().equals(username) && !(userList.get(i).getUserpass().equals(password))) {
+                            Snackbar.make(findViewById(R.id.layout), "Wrong password.", Snackbar.LENGTH_SHORT).show();
+                        } else if (!usernameCheck(username)) {
+                            Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
                         }
                     }
                 }
-            });
-        }
+            }
+        });
+
     }
 
     @Override

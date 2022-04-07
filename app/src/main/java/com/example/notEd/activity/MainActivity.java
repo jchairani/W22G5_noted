@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,8 +13,6 @@ import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.notEd.R;
@@ -34,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     FloatingActionButton addButton;
     int userid, snackbar;
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +64,14 @@ public class MainActivity extends AppCompatActivity {
 
         //add note button
         addButton.setOnClickListener(view -> {
-            Intent i = new Intent(MainActivity.this, noteAcitivity.class);
+            Intent i = new Intent(MainActivity.this, noteActivity.class);
             i.putExtra("userid", userid);
             startActivity(i);
         });
 
         //listview item click
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
-            Intent intent1 = new Intent(getApplicationContext(), noteAcitivity.class);
+            Intent intent1 = new Intent(getApplicationContext(), noteActivity.class);
             intent1.putExtra("position", i);
             intent1.putExtra("userid", userid);
             intent1.putExtra("hasNote", true);
@@ -114,10 +112,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //moveTaskToBack(true); //save activity so user is not logged out
     }
 
     public void logout() {
+        sharedpreferences = getApplicationContext().getSharedPreferences("Preferences", 0);
+
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.remove("LOGIN");
+        editor.remove("ID");
+        editor.commit();
+
         Intent intent = new Intent(MainActivity.this, loginActivity.class);
         intent.putExtra("finish", true);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |

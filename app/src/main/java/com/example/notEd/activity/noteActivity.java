@@ -10,11 +10,9 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.text.Html;
-import android.text.InputType;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
@@ -24,7 +22,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.notEd.R;
@@ -34,7 +31,7 @@ import com.example.notEd.viewmodel.NoteViewModel;
 import java.util.List;
 import java.util.Locale;
 
-public class noteAcitivity extends AppCompatActivity {
+public class noteActivity extends AppCompatActivity {
     NoteViewModel noteViewModel;
     EditText etTitle, etContent;
     ImageButton spchToText, btnBold, btnItalics, btnUnderline, btnCenter, btnLeft, btnRight;
@@ -123,7 +120,7 @@ public class noteAcitivity extends AppCompatActivity {
 
 //        btnImage.setOnClickListener(view -> {
 //            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//                ActivityCompat.requestPermissions(noteAcitivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
+//                ActivityCompat.requestPermissions(noteActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
 //            } else {
 //                addImage();
 //            }
@@ -138,7 +135,7 @@ public class noteAcitivity extends AppCompatActivity {
             try {
                 startActivityForResult(intent1, 10);
             } catch (ActivityNotFoundException ex) {
-                Toast.makeText(noteAcitivity.this, "Your device Does Not Support Speech Input", Toast.LENGTH_SHORT).show();
+                Toast.makeText(noteActivity.this, "Your device Does Not Support Speech Input", Toast.LENGTH_SHORT).show();
                 ex.printStackTrace();
             }
         });
@@ -249,20 +246,20 @@ public class noteAcitivity extends AppCompatActivity {
         if (hasNote) {
             //if there is no changes in title, content, and alignment -> do not save/update the note
             if (title.equals(storedTitle) && content.equals(storedContent) && alignment.equals(storedAlignment)) {
-                Intent i = new Intent(noteAcitivity.this, MainActivity.class);
+                Intent i = new Intent(noteActivity.this, MainActivity.class);
                 i.putExtra("userid", userid);
                 startActivity(i);
             } else { //else, save update the note
                 //noteViewModel.updateNoteById(title, content, alignment, noteId); //commented because not working as expected
                 noteViewModel.insertNote(new Note(title, content, alignment, userid)); //insert updated note
                 noteViewModel.deleteNoteById(noteId); //delete old version of the note
-                Intent i = new Intent(noteAcitivity.this, MainActivity.class);
+                Intent i = new Intent(noteActivity.this, MainActivity.class);
                 i.putExtra("userid", userid);
                 startActivity(i);
             }
         } else { //else or if user has no note and just open the activity (does not make any input/changes) -> do not save note
             if (!(title.equals("") && content.equals(""))) {
-                Intent i = new Intent(noteAcitivity.this, MainActivity.class);
+                Intent i = new Intent(noteActivity.this, MainActivity.class);
                 i.putExtra("userid", userid);
                 noteViewModel.insertNote(new Note(title, content, alignment, userid));
                 startActivity(i);
