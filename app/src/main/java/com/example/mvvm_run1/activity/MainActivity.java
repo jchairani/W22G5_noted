@@ -2,7 +2,6 @@ package com.example.mvvm_run1.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
@@ -10,13 +9,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.mvvm_run1.R;
@@ -68,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent intent1 = new Intent(getApplicationContext(), noteAcitivity.class);
-            intent1.putExtra("position", i );
-            intent1.putExtra("userid",userid);
-            intent1.putExtra("hasNote",true);
+            intent1.putExtra("position", i);
+            intent1.putExtra("userid", userid);
+            intent1.putExtra("hasNote", true);
             startActivity(intent1);
         });
 
@@ -82,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
                 new AlertDialog.Builder(MainActivity.this)
                         .setIcon(android.R.drawable.ic_delete)
-                        .setTitle("Are you sure?")
+                        .setTitle("Delete Note")
                         .setMessage("Do you want to delete this note?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
@@ -93,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                                 noteAdapter.notifyDataSetChanged();
                             }
                         })
-                        .setNegativeButton("No",null)
+                        .setNegativeButton("No", null)
                         .show();
 
                 return true;

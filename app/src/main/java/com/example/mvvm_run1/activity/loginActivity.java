@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,6 +20,7 @@ import com.example.mvvm_run1.database.NoteDatabase;
 import com.example.mvvm_run1.model.User;
 import com.example.mvvm_run1.viewmodel.UserViewModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
@@ -88,7 +91,8 @@ public class loginActivity extends AppCompatActivity {
                     Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
                 } else {
                     if (userList.isEmpty()) {
-                        Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();;
+                        Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
+                        ;
                     } else {
                         for (int i = 0; i < userList.size(); i++) {
                             if (userList.get(i).getUsername().equals(username) && userList.get(i).getUserpass().equals(password)) {
@@ -97,7 +101,7 @@ public class loginActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else if (userList.get(i).getUsername().equals(username) && !(userList.get(i).getUserpass().equals(password))) {
                                 Snackbar.make(findViewById(R.id.layout), "Wrong password.", Snackbar.LENGTH_SHORT).show();
-                            } else if (usernameCheck(username)==false) {
+                            } else if (usernameCheck(username) == false) {
                                 Snackbar.make(findViewById(R.id.layout), "Username does not exist.", Snackbar.LENGTH_SHORT).show();
                             }
                         }

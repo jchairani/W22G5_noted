@@ -25,106 +25,115 @@
             android:textColor="@color/white"
             android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/txtViewName"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/floatingFirstName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:text="@string/txtViewName"
-            android:textColor="@color/white" />
+            android:layout_gravity="center"
+            android:gravity="center">
 
-        <EditText
-            android:id="@+id/inputFirstName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:hint="@string/editTextInputFirstName"
-            android:importantForAutofill="no"
-            android:inputType="textCapWords"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+            <EditText
+                android:id="@+id/inputFirstName"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/sfuidisplay_light"
+                android:hint="@string/editTextInputFirstName"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
 
-        <EditText
-            android:id="@+id/inputLastName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:hint="@string/editTextInputLastName"
-            android:importantForAutofill="no"
-            android:inputType="textCapWords"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/txtViewUsername"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/floatingLastName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:text="@string/txtViewUsername"
-            android:textColor="@color/white" />
+            android:layout_gravity="center"
+            android:gravity="center">
 
-        <EditText
-            android:id="@+id/inputUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:hint="@string/editTxtInputUsername"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
+            <EditText
+                android:id="@+id/inputLastName"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/sfuidisplay_light"
+                android:hint="@string/editTextInputLastName"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
 
-        <TextView
-            android:id="@+id/txtViewPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:text="@string/txtViewPassword"
-            android:textColor="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/inputPassword"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:hint="@string/editTxtInputPassword"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,DuplicateSpeakableTextCheck" />
+            android:layout_gravity="center"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/txtViewConfirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:text="@string/txtViewConfirmPassword"
-            android:textColor="@color/white" />
+            <EditText
+                android:id="@+id/inputUsername"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/sfuidisplay_light"
+                android:hint="@string/editTxtInputUsername"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
 
-        <EditText
-            android:id="@+id/inputPasswordConfirm"
-            android:layout_width="match_parent"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/floatingPassword"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:hint="@string/editTxtPasswordConfirm"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/inputPassword"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/sfuidisplay_light"
+                android:hint="@string/editTxtInputPassword"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/floatingPasswordConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/inputPasswordConfirm"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/sfuidisplay_light"
+                android:hint="Re-enter Password"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnSignup"

@@ -1,6 +1,5 @@
 package com.example.mvvm_run1.activity;
 
-import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 import static java.lang.String.format;
 
 import androidx.annotation.Nullable;
@@ -14,7 +13,6 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.text.Html;
 import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
@@ -67,6 +65,8 @@ public class noteAcitivity extends AppCompatActivity {
 
         notes = noteViewModel.getAllNoteById(userid);
 
+
+
         if (hasNote) {
             noteId = notes.get(position).getNoteid();
             etTitle.setText(notes.get(position).getNotetitle());
@@ -91,7 +91,6 @@ public class noteAcitivity extends AppCompatActivity {
                 ex.printStackTrace();
             }
         });
-
     }
 
     public void buttonBold(View view) {
@@ -138,20 +137,20 @@ public class noteAcitivity extends AppCompatActivity {
     }
 
     public void buttonLeft(View view) {
-        etContent.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         Spannable spannableString = new SpannableStringBuilder(etContent.getText());
+        etContent.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         etContent.setText(spannableString);
     }
 
     public void buttonCenter(View view) {
-        etContent.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         Spannable spannableString = new SpannableStringBuilder(etContent.getText());
+        etContent.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         etContent.setText(spannableString);
     }
 
     public void buttonRight(View view) {
-        etContent.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
         Spannable spannableString = new SpannableStringBuilder(etContent.getText());
+        etContent.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
         etContent.setText(spannableString);
     }
 
@@ -166,7 +165,8 @@ public class noteAcitivity extends AppCompatActivity {
 
         if (hasNote) {
             if (!(title.equals("") && content.equals(""))) {
-                noteViewModel.updateNoteById(title, content, noteId);
+                noteViewModel.insertNote(new Note(title, content, userid));
+                noteViewModel.deleteNoteById(noteId);
                 Intent i = new Intent(noteAcitivity.this, MainActivity.class);
                 i.putExtra("userid", userid);
                 startActivity(i);

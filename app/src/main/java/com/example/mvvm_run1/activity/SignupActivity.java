@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,6 +17,7 @@ import com.example.mvvm_run1.R;
 import com.example.mvvm_run1.model.User;
 import com.example.mvvm_run1.viewmodel.UserViewModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
@@ -38,6 +41,8 @@ public class SignupActivity extends AppCompatActivity {
         signup = findViewById(R.id.btnSignup);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
+        setupFloatingLabelError();
 
         signup.setOnClickListener(view -> {
             userList = userViewModel.getAllUser();
@@ -78,6 +83,55 @@ public class SignupActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void setupFloatingLabelError() {
+        final TextInputLayout floatingPassword = (TextInputLayout) findViewById(R.id.floatingPassword);
+        floatingPassword.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() < 8) {
+                    floatingPassword.setError("Password has to be 8 characters minimum.");
+                    floatingPassword.setErrorEnabled(true);
+                } else {
+                    floatingPassword.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        final TextInputLayout floatingPasswordConfirm = (TextInputLayout) findViewById(R.id.floatingPasswordConfirm);
+        floatingPasswordConfirm.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() < 8) {
+                    floatingPasswordConfirm.setError("Password has to be 8 characters minimum.");
+                    floatingPasswordConfirm.setErrorEnabled(true);
+                } else {
+                    floatingPasswordConfirm.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
     }
 
     public boolean usernameCheck(String username) {

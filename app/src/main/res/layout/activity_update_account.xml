@@ -26,62 +26,67 @@
             android:textColor="@color/white"
             android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/txtViewName"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:text="\n\nName"
-            android:textColor="@color/white" />
+            android:layout_gravity="center"
+            android:gravity="center"
+          >
 
-        <EditText
-            android:id="@+id/inputFirstName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:hint="@string/editTextInputFirstName"
-            android:importantForAutofill="no"
-            android:inputType="textCapWords"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+            <EditText
+                android:id="@+id/inputFirstName"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/sfuidisplay_light"
+                android:hint="@string/editTextInputFirstName"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/inputLastName"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:hint="@string/editTextInputLastName"
-            android:importantForAutofill="no"
-            android:inputType="textCapWords"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+            android:layout_gravity="center"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/txtViewUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:text="@string/txtViewUsername"
-            android:textColor="@color/white" />
+            <EditText
+                android:id="@+id/inputLastName"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/sfuidisplay_light"
+                android:hint="@string/editTextInputLastName"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/inputUsername"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/sfuidisplay_light"
-            android:hint="@string/editTxtInputUsername"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/inputUsername"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/sfuidisplay_light"
+                android:hint="@string/editTxtInputUsername"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/btnUpdate"
