@@ -1,12 +1,12 @@
-package com.example.mvvm_run1.repository;
+package com.example.notEd.repository;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.mvvm_run1.dao.NoteDAO;
-import com.example.mvvm_run1.database.NoteDatabase;
-import com.example.mvvm_run1.model.Note;
+import com.example.notEd.dao.NoteDAO;
+import com.example.notEd.database.NoteDatabase;
+import com.example.notEd.model.Note;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;

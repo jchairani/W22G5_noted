@@ -1,4 +1,4 @@
-package com.example.mvvm_run1.dao;
+package com.example.notEd.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -8,7 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.mvvm_run1.model.Note;
+import com.example.notEd.model.Note;
 
 import java.util.List;
 

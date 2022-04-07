@@ -1,4 +1,4 @@
-package com.example.mvvm_run1.activity;
+package com.example.notEd.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +18,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.mvvm_run1.R;
-import com.example.mvvm_run1.adapter.NoteAdapter;
-import com.example.mvvm_run1.model.Note;
-import com.example.mvvm_run1.viewmodel.NoteViewModel;
+import com.example.notEd.R;
+import com.example.notEd.adapter.NoteAdapter;
+import com.example.notEd.model.Note;
+import com.example.notEd.viewmodel.NoteViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //get intent from previous activity
         Intent intent = getIntent();
         userid = intent.getIntExtra("userid", 0);
         snackbar = intent.getIntExtra("snackbar", 0);
@@ -47,24 +48,30 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listVIewNotes);
         addButton = findViewById(R.id.addButton);
 
+        //set listview method
         initListView();
 
+        //show message if user successfully change password from ResetPasswordActivity
         if (snackbar == 1) {
             Snackbar.make(findViewById(android.R.id.content), "Password changed.", Snackbar.LENGTH_LONG).setAction("CLOSE", view12 -> {
             }).setActionTextColor(getResources().getColor(android.R.color.white)).show();
         }
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
+
+        //showing the notes from db
         noteViewModel.getNoteById(userid).observe(this, notes -> {
             noteAdapter.setNotes(notes);
         });
 
+        //add note button
         addButton.setOnClickListener(view -> {
             Intent i = new Intent(MainActivity.this, noteAcitivity.class);
             i.putExtra("userid", userid);
             startActivity(i);
         });
 
+        //listview item click
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent intent1 = new Intent(getApplicationContext(), noteAcitivity.class);
             intent1.putExtra("position", i);
@@ -73,34 +80,29 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent1);
         });
 
+        //to make device vibrate when user wants to delete note
         final Vibrator vibe = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
 
+        //listview item long click
+        listView.setOnItemLongClickListener((adapterView, view, i, l) -> {
+            vibe.vibrate(80); //vibrate deviceee
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                vibe.vibrate(80);
+            int item_pos = i;
 
-                int item_pos = i;
-
-                new AlertDialog.Builder(MainActivity.this)
-                        .setIcon(android.R.drawable.ic_delete)
-                        .setTitle("Delete Note")
-                        .setMessage("Do you want to delete this note?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                List<Note> notes = noteViewModel.getAllNoteById(userid);
-                                int deleteId = notes.get(item_pos).getNoteid();
-                                noteViewModel.deleteNoteById(deleteId);
-                                noteAdapter.notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
-
-                return true;
-            }
+            //dialog to confirm deletion
+            new AlertDialog.Builder(MainActivity.this)
+                    .setIcon(android.R.drawable.ic_delete)
+                    .setTitle("Delete Note")
+                    .setMessage("Do you want to delete this note?")
+                    .setPositiveButton("Yes", (dialogInterface, i1) -> {
+                        List<Note> notes = noteViewModel.getAllNoteById(userid);
+                        int deleteId = notes.get(item_pos).getNoteid();
+                        noteViewModel.deleteNoteById(deleteId); //delete note
+                        noteAdapter.notifyDataSetChanged();
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+            return true;
         });
     }
 
@@ -112,9 +114,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        moveTaskToBack(true);
+        moveTaskToBack(true); //save activity so user is not logged out
     }
 
+    //menu to access UpdateAccountActivity, ResetPasswordActivity, and log out
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.updateAccount) {
@@ -140,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //inflate menu
     @Override
     public boolean onCreatePanelMenu(int featureId, @NonNull Menu menu) {
         MenuInflater inflater = getMenuInflater();

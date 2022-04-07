@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mvvm_run1">
+    package="com.example.notEd">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+    <!--android:requestLegacyExternalStorage="true"-->
+
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -10,36 +12,35 @@
         android:configChanges="orientation"
         android:icon="@mipmap/icon"
         android:label="notEd"
-        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/icon_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mvvmrun1">
         <activity
-            android:name=".activity.UpdateAccountActivity"
+            android:name="com.example.notEd.activity.UpdateAccountActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".activity.ResetPasswordActivity"
-            android:exported="false"
-            android:noHistory="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".activity.SignupActivity"
+            android:name="com.example.notEd.activity.ResetPasswordActivity"
             android:exported="false"
             android:noHistory="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.example.notEd.activity.SignupActivity"
+            android:exported="false"
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name="com.example.notEd.activity.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
         <activity
-            android:name=".activity.noteAcitivity"
+            android:name="com.example.notEd.activity.noteAcitivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".activity.loginActivity"
+            android:name="com.example.notEd.activity.loginActivity"
             android:exported="true"
             android:noHistory="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">

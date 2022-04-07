@@ -1,14 +1,13 @@
-package com.example.mvvm_run1.viewmodel;
+package com.example.notEd.viewmodel;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.room.Query;
 
-import com.example.mvvm_run1.model.User;
-import com.example.mvvm_run1.repository.UserRepository;
+import com.example.notEd.model.User;
+import com.example.notEd.repository.UserRepository;
 
 import java.util.List;
 

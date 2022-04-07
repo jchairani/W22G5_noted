@@ -1,4 +1,4 @@
-package com.example.mvvm_run1.database;
+package com.example.notEd.database;
 
 
 import android.content.Context;
@@ -7,10 +7,10 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.mvvm_run1.dao.NoteDAO;
-import com.example.mvvm_run1.dao.UserDAO;
-import com.example.mvvm_run1.model.Note;
-import com.example.mvvm_run1.model.User;
+import com.example.notEd.dao.NoteDAO;
+import com.example.notEd.dao.UserDAO;
+import com.example.notEd.model.Note;
+import com.example.notEd.model.User;
 
 @Database(entities={Note.class, User.class},version = 1)
 public abstract class NoteDatabase extends RoomDatabase {

@@ -1,4 +1,4 @@
-package com.example.mvvm_run1.model;
+package com.example.notEd.model;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;

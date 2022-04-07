@@ -1,15 +1,13 @@
-package com.example.mvvm_run1.viewmodel;
+package com.example.notEd.viewmodel;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.mvvm_run1.model.Note;
-import com.example.mvvm_run1.repository.NoteRepository;
+import com.example.notEd.model.Note;
+import com.example.notEd.repository.NoteRepository;
 
 import java.util.List;
 

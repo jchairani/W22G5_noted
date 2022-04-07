@@ -38,7 +38,7 @@
                 android:hint="@string/editTxtTitle"
                 android:inputType="textCapWords"
                 android:padding="10dp"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
 
             <ImageView
@@ -69,7 +69,7 @@
                     android:fontFamily="@font/sfuidisplay_regular"
                     android:gravity="top"
                     android:hint="@string/editTxtContent"
-                    android:inputType="textMultiLine"
+                    android:inputType="textCapSentences|textMultiLine"
                     android:minHeight="48dp"
                     android:paddingStart="10dp"
                     android:paddingTop="10dp"
@@ -96,31 +96,30 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageButton
+            <!--<ImageButton
                 android:id="@+id/btnImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:backgroundTint="#E6F6F6F6"
-                android:backgroundTintMode="add"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
+                android:backgroundTint="#E6F6F6F6"
+                android:backgroundTintMode="add"
                 android:minHeight="48dp"
                 android:src="@drawable/ic_baseline_image_24"
-
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck" />-->
 
             <ImageButton
                 android:id="@+id/imgViewSpeechToTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="16dp"                android:backgroundTint="#E6F6F6F6"
-                android:backgroundTintMode="add"
-
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
+                android:backgroundTint="#E6F6F6F6"
+                android:backgroundTintMode="add"
                 android:contentDescription="@string/imgViewSpeechToText"
                 android:minHeight="48dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -136,9 +135,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
-                android:minHeight="48dp"
                 android:backgroundTint="#E6F6F6F6"
                 android:backgroundTintMode="add"
+                android:minHeight="48dp"
                 android:onClick="buttonBold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -173,10 +172,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
-                android:minHeight="48dp"
-                android:onClick="buttonUnderline"
                 android:backgroundTint="#E6F6F6F6"
                 android:backgroundTintMode="add"
+                android:minHeight="48dp"
+                android:onClick="buttonUnderline"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btnItalics"
                 app:layout_constraintTop_toBottomOf="@+id/editTextContent"
@@ -191,10 +190,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
-                android:minHeight="48dp"
-                android:onClick="buttonResetFormat"
                 android:backgroundTint="#E6F6F6F6"
                 android:backgroundTintMode="add"
+                android:minHeight="48dp"
+                android:onClick="buttonResetFormat"
                 app:srcCompat="@drawable/ic_baseline_format_clear_24"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -206,9 +205,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
-                android:minHeight="48dp"
                 android:backgroundTint="#E6F6F6F6"
                 android:backgroundTintMode="add"
+                android:minHeight="48dp"
                 android:onClick="buttonLeft"
                 app:srcCompat="@drawable/ic_baseline_format_align_left_24"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -219,10 +218,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:backgroundTint="#E6F6F6F6"
-                android:backgroundTintMode="add"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
+                android:backgroundTint="#E6F6F6F6"
+                android:backgroundTintMode="add"
                 android:minHeight="48dp"
                 android:onClick="buttonCenter"
                 app:srcCompat="@drawable/ic_baseline_format_align_center_24"
@@ -234,13 +233,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:minHeight="48dp"
-                android:backgroundTint="#E6F6F6F6"
-                android:backgroundTintMode="add"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="6dp"
+                android:backgroundTint="#E6F6F6F6"
+                android:backgroundTintMode="add"
+                android:minHeight="48dp"
                 android:onClick="buttonRight"
                 app:srcCompat="@drawable/ic_baseline_format_align_right_24" />
 

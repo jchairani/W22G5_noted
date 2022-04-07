@@ -1,7 +1,6 @@
-package com.example.mvvm_run1.activity;
+package com.example.notEd.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -11,11 +10,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.mvvm_run1.R;
-import com.example.mvvm_run1.model.User;
-import com.example.mvvm_run1.viewmodel.UserViewModel;
+import com.example.notEd.R;
+import com.example.notEd.model.User;
+import com.example.notEd.viewmodel.UserViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -40,10 +38,13 @@ public class SignupActivity extends AppCompatActivity {
         lastname = findViewById(R.id.inputLastName);
         signup = findViewById(R.id.btnSignup);
 
+        //UserViewModel
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
+        //floating label error method for password inputs
         setupFloatingLabelError();
 
+        //sign up button clickListener
         signup.setOnClickListener(view -> {
             userList = userViewModel.getAllUser();
             user = username.getText().toString();
@@ -52,28 +53,29 @@ public class SignupActivity extends AppCompatActivity {
             fname = firstname.getText().toString();
             lname = lastname.getText().toString();
 
+            //check if input is empty
             if (user.equals("") || pass.equals("") || repass.equals("")) {
                 Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
             } else {
-                if (usernameCheck(user)==true) {
+                if (usernameCheck(user)==true) { //check if username is taken
                     Snackbar.make(findViewById(R.id.layout), "Username is taken.", Snackbar.LENGTH_SHORT).show();
                 }
-                else if (pass.length() > 7) {
-                    if (pass.equals(repass)) {
+                else if (pass.length() > 7) { //minimum length for password is 8
+                    if (pass.equals(repass)) { //check if password inputs match
                         Snackbar.make(findViewById(R.id.layout), "Successfully registered.", Snackbar.LENGTH_SHORT).show();
-                        userViewModel.insertUser(new User(user, fname, lname, pass));
+                        userViewModel.insertUser(new User(user, fname, lname, pass)); //insert user to db
 
+                        //keep user logged in after signing up
                         SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
                         SharedPreferences.Editor editor = settings.edit();
                         boolean b = true;
                         editor.putBoolean("isChecked", b);
                         editor.commit();
 
+                        //go to MainActivity
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("userid", userViewModel.getIdByUsername(user));
                         startActivity(intent);
-
-
                     } else {
                         Snackbar.make(findViewById(R.id.layout), "Password does not match.", Snackbar.LENGTH_SHORT).show();
                     }
@@ -85,6 +87,7 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
+    //FloatingLabelError to check password inputs on text change
     private void setupFloatingLabelError() {
         final TextInputLayout floatingPassword = (TextInputLayout) findViewById(R.id.floatingPassword);
         floatingPassword.getEditText().addTextChangedListener(new TextWatcher() {
@@ -134,6 +137,7 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
+    //method to check username exists
     public boolean usernameCheck(String username) {
         for (int i = 0; i < userList.size(); i++) {
             if ((userList.get(i).getUsername().equals(username))) {

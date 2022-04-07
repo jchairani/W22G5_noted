@@ -1,4 +1,4 @@
-package com.example.mvvm_run1.adapter;
+package com.example.notEd.adapter;
 
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.mvvm_run1.R;
-import com.example.mvvm_run1.model.Note;
+import com.example.notEd.R;
+import com.example.notEd.model.Note;
 
 import java.util.List;
 

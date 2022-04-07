@@ -1,7 +1,4 @@
-package com.example.mvvm_run1.dao;
-
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+package com.example.notEd.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -11,8 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.mvvm_run1.model.Note;
-import com.example.mvvm_run1.model.User;
+import com.example.notEd.model.User;
 
 import java.util.List;
 
