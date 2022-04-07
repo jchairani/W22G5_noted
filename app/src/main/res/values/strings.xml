@@ -17,4 +17,24 @@
     <string name="editTextInputLastName">Last Name</string>
     <string name="resetHere">Reset password <u>here</u>.</string>
     <string name="registerHere">Sign up <u>here</u>.</string>
+    <string name="welcome">Welcome</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="keep_me_signed_in">Keep me signed in.</string>
+    <string name="login">login</string>
+    <string name="ndon_t_have_an_account">\nDon\'t have an account?</string>
+    <string name="nforgot_password">\nForgot password?</string>
+    <string name="bold_button">Bold Button</string>
+    <string name="button_italics">Button Italics</string>
+    <string name="align_right_button">Align Right Button</string>
+    <string name="align_center_button">Align Center Button</string>
+    <string name="align_left_button">Align Left Button</string>
+    <string name="reset_format_button">Reset Format Button</string>
+    <string name="underline_button">Underline Button</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="enter_username">Enter username</string>
+    <string name="re_enter_password">Re-enter password</string>
+    <string name="next">Next</string>
+    <string name="update">Update</string>
+    <string name="account_information">Account Information</string>
 </resources>

@@ -74,7 +74,7 @@ public class noteAcitivity extends AppCompatActivity {
         btnRight = findViewById(R.id.btnRight);
         btnLeft = findViewById(R.id.btnLeft);
         //btnImage = findViewById(R.id.btnImage);
-        imageView = findViewById(R.id.imageNote);
+        //imageView = findViewById(R.id.imageNote);
 
         notes = noteViewModel.getAllNoteById(userid); //get all notes from db by userid
 

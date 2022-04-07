@@ -41,14 +41,14 @@
                 android:textSize="24sp" />
 
 
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/imageNote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:adjustViewBounds="true"
                 android:visibility="gone"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars" />-->
 
             <LinearLayout
                 android:id="@+id/linearLayoutCenter"
@@ -144,7 +144,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/editTextContent"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/ic_baseline_format_bold_24"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:contentDescription="@string/bold_button" />
 
             <ImageButton
                 android:id="@+id/btnItalics"
@@ -162,7 +163,8 @@
                 app:layout_constraintStart_toEndOf="@+id/btnBold"
                 app:layout_constraintTop_toBottomOf="@+id/editTextContent"
                 app:srcCompat="@drawable/ic_baseline_format_italic_24"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:contentDescription="@string/button_italics" />
 
             <ImageButton
                 android:id="@+id/btnUnderline"
@@ -180,7 +182,8 @@
                 app:layout_constraintStart_toEndOf="@+id/btnItalics"
                 app:layout_constraintTop_toBottomOf="@+id/editTextContent"
                 app:srcCompat="@drawable/ic_baseline_format_underlined_24"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:contentDescription="@string/underline_button" />
 
             <ImageButton
                 android:id="@+id/btnResetFormat"
@@ -195,7 +198,8 @@
                 android:minHeight="48dp"
                 android:onClick="buttonResetFormat"
                 app:srcCompat="@drawable/ic_baseline_format_clear_24"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:contentDescription="@string/reset_format_button" />
 
             <ImageButton
                 android:id="@+id/btnLeft"
@@ -210,7 +214,8 @@
                 android:minHeight="48dp"
                 android:onClick="buttonLeft"
                 app:srcCompat="@drawable/ic_baseline_format_align_left_24"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:contentDescription="@string/align_left_button" />
 
             <ImageButton
                 android:id="@+id/btnCenter"
@@ -225,7 +230,8 @@
                 android:minHeight="48dp"
                 android:onClick="buttonCenter"
                 app:srcCompat="@drawable/ic_baseline_format_align_center_24"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:contentDescription="@string/align_center_button" />
 
 
             <ImageButton
@@ -241,7 +247,8 @@
                 android:backgroundTintMode="add"
                 android:minHeight="48dp"
                 android:onClick="buttonRight"
-                app:srcCompat="@drawable/ic_baseline_format_align_right_24" />
+                app:srcCompat="@drawable/ic_baseline_format_align_right_24"
+                android:contentDescription="@string/align_right_button" />
 
 
         </LinearLayout>
