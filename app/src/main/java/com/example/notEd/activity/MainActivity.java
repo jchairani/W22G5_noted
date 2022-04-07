@@ -114,7 +114,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        moveTaskToBack(true); //save activity so user is not logged out
+        //moveTaskToBack(true); //save activity so user is not logged out
+    }
+
+    public void logout() {
+        Intent intent = new Intent(MainActivity.this, loginActivity.class);
+        intent.putExtra("finish", true);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     //menu to access UpdateAccountActivity, ResetPasswordActivity, and log out
@@ -124,21 +134,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, UpdateAccountActivity.class);
             intent.putExtra("userid", userid);
             startActivity(intent);
-            finish();
         } else if (item.getItemId() == R.id.changePassword) {
             Intent intent = new Intent(MainActivity.this, ResetPasswordActivity.class);
             intent.putExtra("userid", userid);
             startActivity(intent);
-            finish();
         } else if (item.getItemId() == R.id.logout) {
-            SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("isChecked", false);
-            editor.commit();
-
-            Intent intent = new Intent(MainActivity.this, loginActivity.class);
-            startActivity(intent);
-            finish();
+            logout();
         }
         return true;
     }

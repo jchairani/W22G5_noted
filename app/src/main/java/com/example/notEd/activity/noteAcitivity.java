@@ -40,7 +40,7 @@ public class noteAcitivity extends AppCompatActivity {
     ImageButton spchToText, btnBold, btnItalics, btnUnderline, btnCenter, btnLeft, btnRight;
     List<Note> notes;
     String storedContent, alignment, storedTitle, content, title, storedAlignment;
-    ImageView imageView;
+    //ImageView imageView;
     int userid, noteId, position = 0;
     boolean hasNote;
 

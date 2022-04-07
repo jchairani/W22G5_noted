@@ -30,7 +30,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     UserViewModel userViewModel;
     String input, newpass, matchpass, firstname, lastname, username;
     List<User> userList;
-    int userid, fromLogin;
+    int userid, fromLogin, position;
 
     private static ResetPasswordActivity instance;
 
@@ -55,6 +55,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         //get all user from db
         userList = userViewModel.getAllUser();
+
+        try {
+            position = getIndex(userid); //get user index from db
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
         //check if user comes from MainActivity by using userid
         if (userid > 0) {
@@ -104,7 +110,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                             Snackbar.make(findViewById(R.id.layout), "Input cannot be empty.", Snackbar.LENGTH_SHORT).show();
                         } else {
                             //check if new password equals to old/current password
-                            if (userList.get(i).getUserpass().equals(newpass)) {
+                            if (userList.get(position).getUserpass().equals(newpass)) {
                                 Snackbar.make(findViewById(R.id.layout), "New password cannot be the same as current password.", Snackbar.LENGTH_SHORT).show();
                                 break;
                             } else {
@@ -247,4 +253,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+    //get index from db method
+    public int getIndex(int userid) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getUserid() == userid) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }

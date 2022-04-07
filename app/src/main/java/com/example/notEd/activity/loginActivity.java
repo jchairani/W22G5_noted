@@ -32,6 +32,14 @@ public class loginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        boolean finish = getIntent().getBooleanExtra("finish", false);
+        if (finish) {
+            startActivity(new Intent(getApplicationContext(), loginActivity.class));
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_login);
 
         etUsername = findViewById(R.id.etUsername);
@@ -46,6 +54,7 @@ public class loginActivity extends AppCompatActivity {
 
         Intent getIntent = getIntent();
         snackbar = getIntent.getIntExtra("snackbar", 0);
+        isChecked = getIntent.getBooleanExtra("isChecked", false);
 
         if (snackbar == 1) {
             Snackbar.make(findViewById(android.R.id.content), "Password changed.\nPlease log in to continue.", Snackbar.LENGTH_LONG).setAction("CLOSE", view12 -> {
@@ -71,7 +80,7 @@ public class loginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        if (isChecked) {
+        if (isChecked == true) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         } else {
@@ -103,6 +112,10 @@ public class loginActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     public boolean usernameCheck(String username) {
