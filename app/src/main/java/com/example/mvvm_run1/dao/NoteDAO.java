@@ -28,10 +28,10 @@ public interface        NoteDAO {
         @Query("SELECT * FROM note_table WHERE notetitle =:title AND notecontent=:content")
         List<Note> getNoteByTitleContent(String title,String content);
 
-        @Query("SELECT * FROM note_table WHERE usercreatorid =:usercreatorid")
+        @Query("SELECT * FROM note_table WHERE usercreatorid =:usercreatorid ORDER BY noteid DESC")
         List<Note> getAllNotesById(int usercreatorid);
 
-        @Query("SELECT * FROM note_table WHERE usercreatorid =:usercreatorid")
+        @Query("SELECT * FROM note_table WHERE usercreatorid =:usercreatorid ORDER BY noteid DESC")
         LiveData<List<Note>> getNotesById(int usercreatorid);
 
         @Query("SELECT notetitle FROM note_table WHERE noteid =:noteid")
