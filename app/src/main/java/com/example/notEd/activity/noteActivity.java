@@ -244,12 +244,18 @@ public class noteActivity extends AppCompatActivity {
 
         //check if user has notes
         if (hasNote) {
-            //if there is no changes in title, content, and alignment -> do not save/update the note
-            if (title.equals(storedTitle) && content.equals(storedContent) && alignment.equals(storedAlignment)) {
+            //if user deletes the title and content and leave them empty -> delete note
+            if (etTitle.getText().toString().isEmpty() && etContent.getText().toString().isEmpty()) {
+                noteViewModel.deleteNoteById(noteId); //delete old version of the note
                 Intent i = new Intent(noteActivity.this, MainActivity.class);
                 i.putExtra("userid", userid);
                 startActivity(i);
-            } else { //else, save update the note
+            }//if there is no changes in title, content, and alignment -> do not save/update the note
+            else if (title.equals(storedTitle) && content.equals(storedContent) && alignment.equals(storedAlignment)) {
+                Intent i = new Intent(noteActivity.this, MainActivity.class);
+                i.putExtra("userid", userid);
+                startActivity(i);
+            }else { //else, save update the note
                 //noteViewModel.updateNoteById(title, content, alignment, noteId); //commented because not working as expected
                 noteViewModel.insertNote(new Note(title, content, alignment, userid)); //insert updated note
                 noteViewModel.deleteNoteById(noteId); //delete old version of the note
@@ -257,6 +263,7 @@ public class noteActivity extends AppCompatActivity {
                 i.putExtra("userid", userid);
                 startActivity(i);
             }
+
         } else { //else or if user has no note and just open the activity (does not make any input/changes) -> do not save note
             if (!(title.equals("") && content.equals(""))) {
                 Intent i = new Intent(noteActivity.this, MainActivity.class);
